@@ -2,7 +2,6 @@ package de.dafuqs.chalk;
 
 import de.dafuqs.chalk.blocks.ChalkMarkBlock;
 import de.dafuqs.chalk.blocks.GlowChalkMarkBlock;
-import de.dafuqs.chalk.data.CompatibilityData;
 import de.dafuqs.chalk.items.ChalkItem;
 import de.dafuqs.chalk.items.GlowChalkItem;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -49,25 +48,14 @@ public class ChalkRegistry {
 
 	public static void init() {
 		Constants.LOGGER.info("Registering blocks and items...");
-		/*
-		 * colored chalk variants are only added if the colorful addon is installed
-		 * this allows chalk to use the "chalk" mod to use the chalk namespace for all functionality
-		 * while still having it configurable / backwards compatible
-		 */
 		ChalkRegistry.ChalkVariant chalkVariant;
 		for (DyeColor dyeColor : DyeColor.values()) {
 			int color = dyeColors.get(dyeColor);
-			if (dyeColor.equals(DyeColor.WHITE)) {
-				/* backwards compatibility */
-				chalkVariant = new ChalkRegistry.ChalkVariant(dyeColor, color, "");
-				chalkVariant.register();
-				chalkVariants.put(dyeColor, chalkVariant);
-			} else if (CompatibilityData.COLORFUL_ADDON) {
-				/* if colourful addon present */
-				chalkVariant = new ChalkRegistry.ChalkVariant(dyeColor, color, dyeColor + "_");
-				chalkVariant.register();
-				chalkVariants.put(dyeColor, chalkVariant);
-			}
+			// Maintain backward compatibility
+			chalkVariant = new ChalkRegistry.ChalkVariant(dyeColor, color,
+					dyeColor.equals(DyeColor.WHITE) ? "" : dyeColor + "_");
+			chalkVariant.register();
+			chalkVariants.put(dyeColor, chalkVariant);
 		}
 	}
 
