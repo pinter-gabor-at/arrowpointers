@@ -20,11 +20,8 @@
   "icon": "assets/chalk/textures/item/chalk.png",
   "environment": "*",
   "entrypoints": {
-    "client": [
-      "de.dafuqs.chalk.client.ChalkClient"
-    ],
     "main": [
-      "de.dafuqs.chalk.common.Chalk"
+      "de.dafuqs.chalk.Chalk"
     ]
   },
   "mixins": [],

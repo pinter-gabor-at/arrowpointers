@@ -1,7 +1,6 @@
-package de.dafuqs.chalk.common.blocks;
+package de.dafuqs.chalk.blocks;
 
-import de.dafuqs.chalk.client.config.ConfigHelper;
-import de.dafuqs.chalk.common.ChalkRegistry;
+import de.dafuqs.chalk.ChalkRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

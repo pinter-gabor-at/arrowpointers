@@ -1,10 +1,10 @@
-package de.dafuqs.chalk.common;
+package de.dafuqs.chalk;
 
-import de.dafuqs.chalk.common.blocks.ChalkMarkBlock;
-import de.dafuqs.chalk.common.blocks.GlowChalkMarkBlock;
-import de.dafuqs.chalk.common.data.CompatibilityData;
-import de.dafuqs.chalk.common.items.ChalkItem;
-import de.dafuqs.chalk.common.items.GlowChalkItem;
+import de.dafuqs.chalk.blocks.ChalkMarkBlock;
+import de.dafuqs.chalk.blocks.GlowChalkMarkBlock;
+import de.dafuqs.chalk.data.CompatibilityData;
+import de.dafuqs.chalk.items.ChalkItem;
+import de.dafuqs.chalk.items.GlowChalkItem;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;

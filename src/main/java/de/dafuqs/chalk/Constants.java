@@ -1,4 +1,4 @@
-package de.dafuqs.chalk.common;
+package de.dafuqs.chalk;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

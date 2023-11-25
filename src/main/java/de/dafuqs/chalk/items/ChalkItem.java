@@ -1,7 +1,7 @@
-package de.dafuqs.chalk.common.items;
+package de.dafuqs.chalk.items;
 
-import de.dafuqs.chalk.common.ChalkRegistry;
-import de.dafuqs.chalk.common.blocks.ChalkMarkBlock;
+import de.dafuqs.chalk.ChalkRegistry;
+import de.dafuqs.chalk.blocks.ChalkMarkBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;

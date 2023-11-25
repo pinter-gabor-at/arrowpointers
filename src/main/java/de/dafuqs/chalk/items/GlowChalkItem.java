@@ -1,6 +1,6 @@
-package de.dafuqs.chalk.common.items;
+package de.dafuqs.chalk.items;
 
-import de.dafuqs.chalk.common.ChalkRegistry;
+import de.dafuqs.chalk.ChalkRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.util.DyeColor;
 
