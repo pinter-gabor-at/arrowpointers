@@ -7,7 +7,7 @@ public class CompatibilityData {
 	public static boolean CONTINUITY;
 
 	static {
-		COLORFUL_ADDON = (Data.getLoaderType() == Data.LoaderType.FABRIC || Data.getLoaderType() == Data.LoaderType.QUILT) && FabricLoader.getInstance().isModLoaded("chalk-colorful-addon");
-		CONTINUITY = (Data.getLoaderType() == Data.LoaderType.FABRIC || Data.getLoaderType() == Data.LoaderType.QUILT) && FabricLoader.getInstance().isModLoaded("continuity");
+		COLORFUL_ADDON = true;
+		CONTINUITY = false;
 	}
 }

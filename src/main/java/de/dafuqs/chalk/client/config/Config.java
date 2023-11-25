@@ -2,13 +2,13 @@ package de.dafuqs.chalk.client.config;
 
 import com.mclegoman.simplefabriclibs.simple_config.SimpleConfig;
 import com.mojang.datafixers.util.Pair;
-import de.dafuqs.chalk.common.data.Data;
+import de.dafuqs.chalk.common.Constants;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
 public class Config {
-	protected static final String ID = Data.CURRENT_VERSION.getID();
+	protected static final String ID = Constants.MODID;
 	protected static SimpleConfig CONFIG;
 	protected static ConfigProvider CONFIG_PROVIDER;
 	protected static boolean EMIT_PARTICLES;

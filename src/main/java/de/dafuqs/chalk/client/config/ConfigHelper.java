@@ -1,7 +1,6 @@
 package de.dafuqs.chalk.client.config;
 
-import com.mclegoman.releasetypeutils.common.version.Helper;
-import de.dafuqs.chalk.common.data.Data;
+import de.dafuqs.chalk.common.Constants;
 import net.minecraft.client.MinecraftClient;
 
 public class ConfigHelper {
@@ -27,7 +26,7 @@ public class ConfigHelper {
 
 	protected static void updateConfig() {
 		if ((int) getConfig("config_version") != ConfigDefaults.CONFIG_VERSION) {
-			Data.CURRENT_VERSION.sendToLog(Helper.LogType.INFO, "Updating config to the latest version.");
+			Constants.LOGGER.info("Updating config to the latest version.");
 
 			/*
 			 * If any config options values change how they are used, update them here.
@@ -43,7 +42,7 @@ public class ConfigHelper {
 		if (onTick) {
 			SAVE_VIA_TICK = true;
 		} else {
-			Data.CURRENT_VERSION.sendToLog(Helper.LogType.INFO, "Writing config to file.");
+			Constants.LOGGER.info("Writing config to file.");
 			Config.save();
 			Config.CONFIG_PROVIDER.saveConfig(Config.ID);
 		}

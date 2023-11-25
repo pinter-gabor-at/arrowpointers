@@ -1,9 +1,7 @@
 package de.dafuqs.chalk.client.config;
 
-import com.mclegoman.releasetypeutils.common.version.Helper;
 import com.mclegoman.simplefabriclibs.simple_config.SimpleConfig;
 import com.mojang.datafixers.util.Pair;
-import de.dafuqs.chalk.common.data.Data;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
@@ -52,7 +50,7 @@ public class ConfigProvider implements SimpleConfig.DefaultConfig {
 			}
 			CONFIG_LIST = NEW_CONFIG_LIST;
 		} catch (Exception error) {
-			Data.CURRENT_VERSION.sendToLog(Helper.LogType.ERROR, String.valueOf(error));
+			//Data.CURRENT_VERSION.sendToLog(Helper.LogType.ERROR, String.valueOf(error));
 		}
 	}
 
@@ -63,7 +61,7 @@ public class ConfigProvider implements SimpleConfig.DefaultConfig {
 			writer.write(CONTENTS);
 			writer.close();
 		} catch (Exception error) {
-			Data.CURRENT_VERSION.sendToLog(Helper.LogType.ERROR, String.valueOf(error));
+			//Data.CURRENT_VERSION.sendToLog(Helper.LogType.ERROR, String.valueOf(error));
 		}
 	}
 }
