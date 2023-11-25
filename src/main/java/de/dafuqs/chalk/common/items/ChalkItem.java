@@ -1,6 +1,5 @@
 package de.dafuqs.chalk.common.items;
 
-import de.dafuqs.chalk.client.config.ConfigHelper;
 import de.dafuqs.chalk.common.ChalkRegistry;
 import de.dafuqs.chalk.common.blocks.ChalkMarkBlock;
 import net.minecraft.block.Block;
@@ -54,8 +53,9 @@ public class ChalkItem extends Item {
 
 			if (world.isClient) {
 				Random r = new Random();
-				if ((boolean) ConfigHelper.getConfig("emit_particles"))
-					world.addParticle(ParticleTypes.CLOUD, markPosition.getX() + (0.5 * (r.nextFloat() + 0.4)), markPosition.getY() + 0.65, markPosition.getZ() + (0.5 * (r.nextFloat() + 0.4)), 0.0D, 0.005D, 0.0D);
+				world.addParticle(ParticleTypes.CLOUD,
+						markPosition.getX() + (0.5 * (r.nextFloat() + 0.4)), markPosition.getY() + 0.65, markPosition.getZ() + (0.5 * (r.nextFloat() + 0.4)),
+						0.0D, 0.005D, 0.0D);
 				return ActionResult.SUCCESS;
 			}
 

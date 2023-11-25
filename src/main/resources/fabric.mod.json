@@ -25,9 +25,6 @@
     ],
     "main": [
       "de.dafuqs.chalk.common.Chalk"
-    ],
-    "modmenu": [
-      "de.dafuqs.chalk.compat.ChalkModMenu"
     ]
   },
   "mixins": [],

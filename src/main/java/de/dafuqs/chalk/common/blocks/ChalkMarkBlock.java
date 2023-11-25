@@ -74,12 +74,13 @@ public class ChalkMarkBlock extends Block {
 
     @Override
     protected void spawnBreakParticles(World world, PlayerEntity player, BlockPos pos, BlockState state) {
-        if (!world.isClient)
+        if (!world.isClient) {
             world.playSound(null, pos, SoundEvents.BLOCK_WART_BLOCK_HIT, SoundCategory.BLOCKS, 0.5f, new Random().nextFloat() * 0.2f + 0.8f);
-        else{
+        } else {
             Random r = new Random();
-            if ((boolean) ConfigHelper.getConfig("emit_particles"))
-                world.addParticle(ParticleTypes.CLOUD, pos.getX() + (0.5 * (r.nextFloat() + 0.15)), pos.getY() + 0.3, pos.getZ() + (0.5 * (r.nextFloat() + 0.15)), 0.0D, 0.0D, 0.0D);
+            world.addParticle(ParticleTypes.CLOUD,
+                    pos.getX() + (0.5 * (r.nextFloat() + 0.15)), pos.getY() + 0.3, pos.getZ() + (0.5 * (r.nextFloat() + 0.15)),
+                    0.0D, 0.0D, 0.0D);
         }
     }
 
