@@ -1,27 +1,22 @@
 {
   "schemaVersion": 1,
-  "id": "chalk",
+  "id": "arrowpointers",
   "version": "${version}",
-  "name": "Chalk",
-  "description": "Fabric port of the forge mod chalk by mortuusars with some additions",
+  "name": "Arrow pointers",
+  "description": "Use arrows to mark your path.",
   "authors": [
-    "DaFuqs",
-    "mortuusars"
-  ],
-  "contributors": [
-    "MCLegoMan"
+    "Pintér Gábor <pinter.gabor@gmx.at>"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/chalk-fabric",
-    "sources": "https://github.com/DaFuqs/Chalk",
-    "issues": "https://github.com/DaFuqs/Chalk/issues"
+    "homepage": "https://pintergabor.eu/en/minecraft/mods/arrowpointers/",
+    "sources": "https://gitlab.com/pintergabor/arrowpointers"
   },
   "license": "MIT",
-  "icon": "assets/chalk/textures/item/chalk.png",
+  "icon": "assets/arrowpointers/textures/item/chalk.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "eu.pintergabor.chalk.Chalk"
+      "eu.pintergabor.arrowpointers.ArrowPointers"
     ]
   },
   "mixins": [],
