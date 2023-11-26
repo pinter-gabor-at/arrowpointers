@@ -12,7 +12,7 @@
     "sources": "https://gitlab.com/pintergabor/arrowpointers"
   },
   "license": "MIT",
-  "icon": "assets/arrowpointers/icons/4x_arrow_mark.png",
+  "icon": "assets/arrowpointers/icons/4x_arrow_marks.png",
   "environment": "*",
   "entrypoints": {
     "main": [
