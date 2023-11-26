@@ -1,4 +1,4 @@
-package de.dafuqs.chalk;
+package eu.pintergabor.chalk;
 
 import net.fabricmc.api.ModInitializer;
 

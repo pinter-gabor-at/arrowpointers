@@ -1,7 +1,7 @@
-package de.dafuqs.chalk.items;
+package eu.pintergabor.chalk.items;
 
-import de.dafuqs.chalk.ChalkRegistry;
-import de.dafuqs.chalk.blocks.ChalkMarkBlock;
+import eu.pintergabor.chalk.ChalkRegistry;
+import eu.pintergabor.chalk.blocks.ChalkMarkBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;

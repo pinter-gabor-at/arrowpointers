@@ -1,9 +1,9 @@
-package de.dafuqs.chalk;
+package eu.pintergabor.chalk;
 
-import de.dafuqs.chalk.blocks.ChalkMarkBlock;
-import de.dafuqs.chalk.blocks.GlowChalkMarkBlock;
-import de.dafuqs.chalk.items.ChalkItem;
-import de.dafuqs.chalk.items.GlowChalkItem;
+import eu.pintergabor.chalk.blocks.ChalkMarkBlock;
+import eu.pintergabor.chalk.blocks.GlowChalkMarkBlock;
+import eu.pintergabor.chalk.items.ChalkItem;
+import eu.pintergabor.chalk.items.GlowChalkItem;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;

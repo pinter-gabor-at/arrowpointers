@@ -21,7 +21,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "de.dafuqs.chalk.Chalk"
+      "eu.pintergabor.chalk.Chalk"
     ]
   },
   "mixins": [],

@@ -1,4 +1,4 @@
-package de.dafuqs.chalk;
+package eu.pintergabor.chalk;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

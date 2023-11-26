@@ -1,6 +1,6 @@
-package de.dafuqs.chalk.blocks;
+package eu.pintergabor.chalk.blocks;
 
-import de.dafuqs.chalk.ChalkRegistry;
+import eu.pintergabor.chalk.ChalkRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DyeColor;
