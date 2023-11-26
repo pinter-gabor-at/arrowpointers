@@ -1,17 +1,14 @@
 package eu.pintergabor.arrowpointers;
 
 import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
-import eu.pintergabor.arrowpointers.blocks.GlowArrowMarkBlock;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -31,7 +28,7 @@ public class ArrowVariant {
 				.nonOpaque()
 				.sounds(BlockSoundGroup.GRAVEL)
 				.pistonBehavior(PistonBehavior.DESTROY));
-		this.glowArrowMarkBlock = new GlowArrowMarkBlock(AbstractBlock.Settings
+		this.glowArrowMarkBlock = new ArrowMarkBlock(AbstractBlock.Settings
 				.create()
 				.replaceable()
 				.noCollision()
@@ -60,7 +57,7 @@ public class ArrowVariant {
 	public void registerClient() {
 		BlockRenderLayerMap.INSTANCE.putBlock(this.arrowMarkBlock, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(this.glowArrowMarkBlock, RenderLayer.getCutout());
-		ColorProviderRegistry.BLOCK.register((state, world, pos, index) -> 0xFFFFFF, arrowMarkBlock);
-		ColorProviderRegistry.BLOCK.register((state, world, pos, index) -> 0xFFFFFF, glowArrowMarkBlock);
+//		ColorProviderRegistry.BLOCK.register((state, world, pos, index) -> 0xFFFFFF, arrowMarkBlock);
+//		ColorProviderRegistry.BLOCK.register((state, world, pos, index) -> 0xFFFFFF, glowArrowMarkBlock);
 	}
 }
