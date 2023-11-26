@@ -1,6 +1,5 @@
 package eu.pintergabor.arrowpointers.blocks;
 
-import eu.pintergabor.arrowpointers.ArrowRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -11,15 +10,12 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.Registries;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -76,12 +72,9 @@ public class ArrowMarkBlock extends Block {
 	@Override
 	protected void spawnBreakParticles(World world, PlayerEntity player, BlockPos pos, BlockState state) {
 		if (!world.isClient) {
-			world.playSound(null, pos, SoundEvents.BLOCK_WART_BLOCK_HIT, SoundCategory.BLOCKS, 0.5f, new Random().nextFloat() * 0.2f + 0.8f);
-		} else {
-			Random r = new Random();
-			world.addParticle(ParticleTypes.CLOUD,
-					pos.getX() + (0.5 * (r.nextFloat() + 0.15)), pos.getY() + 0.3, pos.getZ() + (0.5 * (r.nextFloat() + 0.15)),
-					0.0D, 0.0D, 0.0D);
+			world.playSound(null, pos,
+					SoundEvents.BLOCK_LADDER_BREAK, SoundCategory.BLOCKS,
+					0.5f, new Random().nextFloat() * 0.2f + 0.8f);
 		}
 	}
 

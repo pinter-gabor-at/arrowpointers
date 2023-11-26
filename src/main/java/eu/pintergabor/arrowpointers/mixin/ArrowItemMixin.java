@@ -16,7 +16,7 @@ public class ArrowItemMixin extends Item {
 
 	@Override
 	public ActionResult useOnBlock(ItemUsageContext context) {
-		return ClickAction.useOnBlock(this, context, ArrowRegistry.arrowVariant.arrowMarkBlock);
+		return ClickAction.useOnBlock(this, context, ArrowRegistry.arrowMarkBlock);
 	}
 
 }
