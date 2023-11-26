@@ -26,14 +26,14 @@ public class ArrowVariant {
 				.replaceable()
 				.noCollision()
 				.nonOpaque()
-				.sounds(BlockSoundGroup.GRAVEL)
+				.sounds(BlockSoundGroup.LADDER)
 				.pistonBehavior(PistonBehavior.DESTROY));
 		this.glowArrowMarkBlock = new ArrowMarkBlock(AbstractBlock.Settings
 				.create()
 				.replaceable()
 				.noCollision()
 				.nonOpaque()
-				.sounds(BlockSoundGroup.GRAVEL)
+				.sounds(BlockSoundGroup.LADDER)
 				.luminance((state) -> 1)
 				.postProcess(ArrowVariant::always)
 				.emissiveLighting(ArrowVariant::always)
@@ -57,7 +57,5 @@ public class ArrowVariant {
 	public void registerClient() {
 		BlockRenderLayerMap.INSTANCE.putBlock(this.arrowMarkBlock, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(this.glowArrowMarkBlock, RenderLayer.getCutout());
-//		ColorProviderRegistry.BLOCK.register((state, world, pos, index) -> 0xFFFFFF, arrowMarkBlock);
-//		ColorProviderRegistry.BLOCK.register((state, world, pos, index) -> 0xFFFFFF, glowArrowMarkBlock);
 	}
 }
