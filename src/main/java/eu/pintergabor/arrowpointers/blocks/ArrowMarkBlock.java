@@ -69,11 +69,6 @@ public class ArrowMarkBlock extends Block {
 	}
 
 	@Override
-	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-		return ArrowRegistry.arrowVariant.chalkItem.getDefaultStack();
-	}
-
-	@Override
 	protected void spawnBreakParticles(World world, PlayerEntity player, BlockPos pos, BlockState state) {
 		if (!world.isClient) {
 			world.playSound(null, pos, SoundEvents.BLOCK_WART_BLOCK_HIT, SoundCategory.BLOCKS, 0.5f, new Random().nextFloat() * 0.2f + 0.8f);

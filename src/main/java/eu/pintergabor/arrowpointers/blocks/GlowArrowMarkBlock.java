@@ -13,9 +13,4 @@ public class GlowArrowMarkBlock extends ArrowMarkBlock {
         super(settings);
     }
     
-    @Override
-    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return ArrowRegistry.arrowVariant.glowChalkItem.getDefaultStack();
-    }
-
 }
