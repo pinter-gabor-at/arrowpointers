@@ -19,7 +19,9 @@
       "eu.pintergabor.arrowpointers.ArrowPointers"
     ]
   },
-  "mixins": [],
+  "mixins": [
+    "arrowpointers.mixins.json"
+  ],
   "depends": {
     "minecraft": "~1.20",
     "fabric-api": "*"

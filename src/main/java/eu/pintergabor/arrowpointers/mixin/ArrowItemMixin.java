@@ -1,14 +1,16 @@
-package eu.pintergabor.arrowpointers.items;
+package eu.pintergabor.arrowpointers.mixin;
 
 import eu.pintergabor.arrowpointers.ArrowRegistry;
 import eu.pintergabor.arrowpointers.util.ClickAction;
+import net.minecraft.item.ArrowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
+import org.spongepowered.asm.mixin.Mixin;
 
-public class ChalkItem extends Item {
-
-	public ChalkItem(Settings settings) {
+@Mixin(ArrowItem.class)
+public class ArrowItemMixin extends Item {
+	public ArrowItemMixin(Settings settings) {
 		super(settings);
 	}
 
