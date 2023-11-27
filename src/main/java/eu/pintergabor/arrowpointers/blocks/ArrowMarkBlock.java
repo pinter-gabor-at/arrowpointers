@@ -28,25 +28,33 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
+import static eu.pintergabor.arrowpointers.Constants.*;
+import static eu.pintergabor.arrowpointers.util.BlockRegion.MIDDLECENTER;
+
+
 public class ArrowMarkBlock extends Block {
 
 	public static final DirectionProperty FACING = Properties.FACING;
 	public static final IntProperty ORIENTATION = IntProperty.of("orientation", 0, 8);
 
-	// Hitbox margin: 0 … 2
-	private static final double margin = 0D;
-	// Hitbox thickness: 0.001 … 2
-	private static final double thick = 0.001D;
-	private static final VoxelShape DOWN_AABB = Block.createCuboidShape(margin, 16D - thick, margin, 16D - margin, 16D, 16D - margin);
-	private static final VoxelShape UP_AABB = Block.createCuboidShape(margin, 0D, margin, 16D - margin, thick, 16D - margin);
-	private static final VoxelShape SOUTH_AABB = Block.createCuboidShape(margin, margin, 0D, 16D - margin, 16D - margin, thick);
-	private static final VoxelShape EAST_AABB = Block.createCuboidShape(0D, margin, margin, thick, 16D - margin, 16D - margin);
-	private static final VoxelShape WEST_AABB = Block.createCuboidShape(16D - thick, margin, margin, 16D, 16D - margin, 16D - margin);
-	private static final VoxelShape NORTH_AABB = Block.createCuboidShape(margin, margin, 16D - thick, 16D - margin, 16D - margin, 16D);
+	private static final VoxelShape DOWN_AABB = Block.createCuboidShape(
+			margin, 16D - thick, margin, 16D - margin, 16D, 16D - margin);
+	private static final VoxelShape UP_AABB = Block.createCuboidShape(
+			margin, 0D, margin, 16D - margin, thick, 16D - margin);
+	private static final VoxelShape SOUTH_AABB = Block.createCuboidShape(
+			margin, margin, 0D, 16D - margin, 16D - margin, thick);
+	private static final VoxelShape EAST_AABB = Block.createCuboidShape(
+			0D, margin, margin, thick, 16D - margin, 16D - margin);
+	private static final VoxelShape WEST_AABB = Block.createCuboidShape(
+			16D - thick, margin, margin, 16D, 16D - margin, 16D - margin);
+	private static final VoxelShape NORTH_AABB = Block.createCuboidShape(
+			margin, margin, 16D - thick, 16D - margin, 16D - margin, 16D);
 
 	public ArrowMarkBlock(Settings settings) {
 		super(settings);
-		this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(ORIENTATION, 0));
+		this.setDefaultState(this.getDefaultState()
+				.with(FACING, Direction.NORTH)
+				.with(ORIENTATION, MIDDLECENTER));
 	}
 
 	@SuppressWarnings("deprecation")
@@ -62,9 +70,15 @@ public class ArrowMarkBlock extends Block {
 	}
 
 	@Override
-	public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool) {
+	public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state,
+						   @Nullable BlockEntity blockEntity, ItemStack tool) {
 		if (!world.isClient) {
-			final ItemStack stack = new ItemStack(state.getLuminance() == 0 ? Items.ARROW : Items.SPECTRAL_ARROW);
+			// Breaking ArrowMarkBlock drops an ArrowItem,
+			// breaking GlowArrowMarkBlock drops a SpectralArrowItem
+			// normally 1, but if orientation is center, then 2.
+			final ItemStack stack = new ItemStack(
+					state.getLuminance() <= arrowMarkBlockLumi ? Items.ARROW : Items.SPECTRAL_ARROW,
+					state.get(ORIENTATION) == MIDDLECENTER ? 2 : 1);
 			dropStack(world, pos, stack);
 		}
 	}
@@ -107,12 +121,14 @@ public class ArrowMarkBlock extends Block {
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		Direction facing = state.get(FACING);
-		return Block.isFaceFullSquare(world.getBlockState(pos.offset(facing.getOpposite())).getCollisionShape(world, pos.offset(facing)), facing);
+		return Block.isFaceFullSquare(world.getBlockState(pos.offset(facing.getOpposite()))
+				.getCollisionShape(world, pos.offset(facing)), facing);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
+												WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 		boolean support = neighborPos.equals(pos.offset(state.get(FACING).getOpposite()));
 		if (support) {
 			if (!this.canPlaceAt(state, world, pos)) {

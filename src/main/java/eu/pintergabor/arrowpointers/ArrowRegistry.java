@@ -16,8 +16,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 
-public class ArrowRegistry {
+import static eu.pintergabor.arrowpointers.Constants.arrowMarkBlockLumi;
+import static eu.pintergabor.arrowpointers.Constants.glowArrowMarkBlockLumi;
 
+
+public class ArrowRegistry {
 	private ArrowRegistry() {
 		// static class
 	}
@@ -32,6 +35,9 @@ public class ArrowRegistry {
 				.noCollision()
 				.nonOpaque()
 				.sounds(BlockSoundGroup.LADDER)
+				.luminance((state) -> arrowMarkBlockLumi)
+				.postProcess(ArrowRegistry::always)
+				.emissiveLighting(ArrowRegistry::always)
 				.pistonBehavior(PistonBehavior.DESTROY));
 		glowArrowMarkBlock = new ArrowMarkBlock(AbstractBlock.Settings
 				.create()
@@ -39,7 +45,7 @@ public class ArrowRegistry {
 				.noCollision()
 				.nonOpaque()
 				.sounds(BlockSoundGroup.LADDER)
-				.luminance((state) -> 1)
+				.luminance((state) -> glowArrowMarkBlockLumi)
 				.postProcess(ArrowRegistry::always)
 				.emissiveLighting(ArrowRegistry::always)
 				.pistonBehavior(PistonBehavior.DESTROY));
