@@ -17,52 +17,63 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-import static eu.pintergabor.arrowpointers.util.ClickUtil.getClickedRegion;
+import static eu.pintergabor.arrowpointers.util.BlockRegion.MIDDLECENTER;
+import static eu.pintergabor.arrowpointers.util.BlockRegion.getClickedRegion;
 
 
 public class ClickAction {
-
 	private ClickAction() {
 		// Static class
 	}
 
+	/**
+	 * Called when the player right-clicks on a block with an ArrowItem or a
+	 * SpectralArrowItem in hand.
+	 * @param item an ArrowItem or a SpectralArrowItem
+	 * @param context the context of the useOnBlock call
+	 * @param block an ArrowMarkBlock or a GlowArrowMarkBlock
+	 * @return the usual ActionResult values
+	 */
 	public static ActionResult useOnBlock(Item item, ItemUsageContext context, Block block) {
 		final World world = context.getWorld();
 		final BlockPos pos = context.getBlockPos();
 		final BlockState clickedBlockState = world.getBlockState(pos);
 		final PlayerEntity player = context.getPlayer();
 		final ItemStack stack = context.getStack();
-		Direction clickedFace = context.getSide();
-		BlockPos markPosition = pos.offset(clickedFace);
+		final Direction clickedFace = context.getSide();
+		final BlockPos markPosition = pos.offset(clickedFace);
 		if (world.isAir(markPosition) || world.getBlockState(markPosition).getBlock() instanceof ArrowMarkBlock) {
-			final Block clickedBlock = clickedBlockState.getBlock();
-			if (clickedBlock instanceof ArrowMarkBlock) {
-				// Remove previous mark, before placing the new one
-				clickedFace = clickedBlockState.get(ArrowMarkBlock.FACING);
-				markPosition = pos;
-				world.removeBlock(pos, false);
-				clickedBlock.afterBreak(world, player, pos, clickedBlockState, null, stack);
-			} else if (player != null &&
+			if (player != null &&
 					!Block.isFaceFullSquare(clickedBlockState.getCollisionShape(world, pos, ShapeContext.of(player)), clickedFace)) {
 				return ActionResult.PASS;
 			} else if ((!world.isAir(markPosition) && world.getBlockState(markPosition).getBlock() instanceof ArrowMarkBlock) || stack.getItem() != item) {
 				return ActionResult.PASS;
 			}
 
+			// Normally we need 1 item, but if orientation is center, then 2
+			final int orientation = getClickedRegion(context.getHitPos(), clickedFace);
+			int consume = 1;
+			if (orientation == MIDDLECENTER) {
+				if (stack.getCount() < 2) {
+					return ActionResult.PASS;
+				}
+				consume = 2;
+			}
+
 			if (world.isClient) {
 				return ActionResult.SUCCESS;
 			}
 
-			final int orientation = getClickedRegion(context.getHitPos(), clickedFace);
-
+			// The new block
 			BlockState blockState = block.getDefaultState()
 					.with(ArrowMarkBlock.FACING, clickedFace)
 					.with(ArrowMarkBlock.ORIENTATION, orientation);
 
+			// Place it
 			if (world.setBlockState(markPosition, blockState, 1 | 2)) {
 				if (player != null &&
 						!player.isCreative()) {
-					stack.decrement(1);
+					stack.decrement(consume);
 				}
 				world.playSound(null, markPosition,
 						SoundEvents.BLOCK_LADDER_BREAK, SoundCategory.BLOCKS,

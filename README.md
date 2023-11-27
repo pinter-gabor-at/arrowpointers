@@ -1,25 +1,38 @@
-# Chalk (Fabric/Quilt)  
-Download from [Curseforge](https://www.curseforge.com/minecraft/mc-mods/chalk-fabric) or [Modrinth](https://modrinth.com/mod/chalk).  
-Looking for the Forge version? [Click Here](https://modrinth.com/mod/chalk-mod).  
+# Arror Pointers (Fabric)
 
-![Chalk](./images/chalk_sculk.png "Chalk")
+![Screenshot](./images/screenshot.png "Arrow Pointers screenshot")
 
-Fabric/Quilt Loader port of the Minecraft mod [Chalk](https://github.com/mortuusars/Chalk) by mortuusars with some additions and 1.17+ adjustments.  
+**Allows you to place arrows on any full block to aid you on your mining journeys. Never lose your way again.**
 
-**Adds two simple types of chalk to aid you on your mining journeys. Never lose your way again.**
+Hitting the corner of a block places an arrow pointing in that direction, hitting the center creates an X, but consumes 2 arrows.  
+The placed arrows emit a faint light, and they are visible even in the dark.  
+Spectral arrows work similarily, but the placed arrows are brighter, perfect for caving action!
 
-Thank you very much for creating the original Forge version and the permission to port Chalk to fabric!  
+
+## License
+
+Standard MIT license. Feel free to learn from it and incorporate it in your own projects.
+
+## Source code
+
+[GitLab: arrowpointers.git](https://gitlab.com/pintergabor/arrowpointers.git)
+
+## For developers
+
+Quite often, when I start learning programming on a new platform, I find even the simplest examples too complicated.
+Tutorials, written by experts, with years of experience programming on that platform, sometimes forget how difficult those first step are.  
+This is why I decided to make my first Minecraft mods publicly available.
+
 
 ## Requires  
-- [Fabric API](https://modrinth.com/mod/fabric-api) *or* [Quilted Fabric API (QFAPI)](https://modrinth.com/mod/qsl)  
+- [Fabric API](https://modrinth.com/mod/fabric-api)
 
-## Adds:  
-- Chalk: Crafted shapeless with two Calcite  
-- Glow Chalk: Crafted shapeless with two Calcite and a Glow Ink Sac  
+## Thanks
 
-With chalk, you are able to mark the surface of every full block.  
-Hitting the corner of a block creates an arrow pointing in that direction, hitting the center creates an X.  
-Marks from Glow Chalk can be seen in total darkness, perfect for caving action!  
+This mod was inspired by [Chalk](https://modrinth.com/mod/chalk) made by [DaFuqs](https://modrinth.com/user/DaFuqs).
+Reading his code helped me a lot writing this mod.
 
-## Addons  
-[Chalk: Colorful Addon](https://modrinth.com/mod/chalk-colorful-addon) adds variants of chalk in every color!  
+## Recommended addons  
+[Chalk](https://modrinth.com/mod/chalk) provides a different way to mark your path with arrows.  
+And [Chalk: Colorful Addon](https://modrinth.com/mod/chalk-colorful-addon) adds variants of chalk in every color!
+

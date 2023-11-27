@@ -4,11 +4,30 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
 
-public class ClickUtil {
 
-	private ClickUtil() {
+public class BlockRegion {
+	private BlockRegion() {
 		// Static class
 	}
+
+	@SuppressWarnings("unused")
+	public static final int TOPLEFT = 0;
+	@SuppressWarnings("unused")
+	public static final int TOPCENTER = 1;
+	@SuppressWarnings("unused")
+	public static final int TOPRIGHT = 2;
+	@SuppressWarnings("unused")
+	public static final int MIDDLELEFT = 3;
+	@SuppressWarnings("unused")
+	public static final int MIDDLECENTER = 4;
+	@SuppressWarnings("unused")
+	public static final int MIDDLERIGHT = 5;
+	@SuppressWarnings("unused")
+	public static final int BOTTOMLEFT = 6;
+	@SuppressWarnings("unused")
+	public static final int BOTTOMCENTER = 7;
+	@SuppressWarnings("unused")
+	public static final int BOTTOMRIGHT = 8;
 
 	/**
 	 * Calculate the fractional part of v

@@ -15,6 +15,7 @@ public class TippedArrowItemMixin extends ArrowItem {
 
 	@Override
 	public ActionResult useOnBlock(ItemUsageContext context) {
+		// Restore default action
 		return ActionResult.PASS;
 	}
 
