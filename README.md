@@ -1,8 +1,4 @@
-<<<<<<< .mine
 # Arrow Pointers (Fabric)
-=======
-# Arror Pointers (Fabric)
->>>>>>> .theirs
 
 ![Screenshot](./images/screenshot.png "Arrow Pointers screenshot")
 
