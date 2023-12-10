@@ -7,7 +7,7 @@ import net.minecraft.util.ActionResult;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(TippedArrowItem.class)
-public class TippedArrowItemMixin extends ArrowItem {
+public abstract class TippedArrowItemMixin extends ArrowItem {
 
 	public TippedArrowItemMixin(Settings settings) {
 		super(settings);

@@ -20,7 +20,6 @@ import java.util.Random;
 import static eu.pintergabor.arrowpointers.util.BlockRegion.MIDDLECENTER;
 import static eu.pintergabor.arrowpointers.util.BlockRegion.getClickedRegion;
 
-
 public class ClickAction {
 	private ClickAction() {
 		// Static class
@@ -83,5 +82,4 @@ public class ClickAction {
 		}
 		return ActionResult.FAIL;
 	}
-
 }

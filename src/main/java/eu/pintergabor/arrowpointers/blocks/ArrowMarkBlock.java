@@ -28,9 +28,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static eu.pintergabor.arrowpointers.Constants.*;
+import static eu.pintergabor.arrowpointers.Global.*;
 import static eu.pintergabor.arrowpointers.util.BlockRegion.MIDDLECENTER;
-
 
 public class ArrowMarkBlock extends Block {
 

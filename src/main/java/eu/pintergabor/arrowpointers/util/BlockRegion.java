@@ -4,7 +4,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
 
-
 public class BlockRegion {
 	private BlockRegion() {
 		// Static class
@@ -61,5 +60,4 @@ public class BlockRegion {
 					blockreg(Math.min(2, (int) (3 * (1 - dy))), Math.min(2, (int) (3 * dz)));
 		};
 	}
-
 }

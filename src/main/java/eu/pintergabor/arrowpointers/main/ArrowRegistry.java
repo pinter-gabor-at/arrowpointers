@@ -1,14 +1,11 @@
-package eu.pintergabor.arrowpointers;
+package eu.pintergabor.arrowpointers.main;
 
+import eu.pintergabor.arrowpointers.Global;
 import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -16,9 +13,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 
-import static eu.pintergabor.arrowpointers.Constants.arrowMarkBlockLumi;
-import static eu.pintergabor.arrowpointers.Constants.glowArrowMarkBlockLumi;
-
+import static eu.pintergabor.arrowpointers.Global.arrowMarkBlockLumi;
+import static eu.pintergabor.arrowpointers.Global.glowArrowMarkBlockLumi;
 
 public class ArrowRegistry {
 	private ArrowRegistry() {
@@ -50,11 +46,10 @@ public class ArrowRegistry {
 				.emissiveLighting(ArrowRegistry::always)
 				.pistonBehavior(PistonBehavior.DESTROY));
 		register();
-		registerClient();
 	}
 
 	private static void registerBlock(String name, Block block) {
-		Registry.register(Registries.BLOCK, new Identifier(Constants.MODID, name), block);
+		Registry.register(Registries.BLOCK, new Identifier(Global.MODID, name), block);
 	}
 
 	private static boolean always(BlockState blockState, BlockView blockView, BlockPos blockPos) {
@@ -65,11 +60,4 @@ public class ArrowRegistry {
 		registerBlock("arrow_mark", arrowMarkBlock);
 		registerBlock("glow_arrow_mark", glowArrowMarkBlock);
 	}
-
-	@Environment(EnvType.CLIENT)
-	public static void registerClient() {
-		BlockRenderLayerMap.INSTANCE.putBlock(arrowMarkBlock, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(glowArrowMarkBlock, RenderLayer.getCutout());
-	}
-
 }

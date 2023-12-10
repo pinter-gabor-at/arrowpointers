@@ -3,9 +3,8 @@ package eu.pintergabor.arrowpointers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
-public final class Constants {
-	private Constants() {
+public final class Global {
+	private Global() {
 		// Static class
 	}
 
@@ -26,5 +25,4 @@ public final class Constants {
 	public static final int arrowMarkBlockLumi = 1;
 	// GlowArrowMarkBlock luminance
 	public static final int glowArrowMarkBlockLumi = 12;
-
 }
