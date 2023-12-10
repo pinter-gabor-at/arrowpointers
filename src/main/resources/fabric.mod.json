@@ -1,8 +1,8 @@
 {
-	"schemaVersion": 1,
-	"id": "arrowpointers",
-	"version": "${version}",
-	"name": "Arrow Pointers",
+  "schemaVersion": 1,
+  "id": "arrowpointers",
+  "version": "${version}",
+  "name": "Arrow Pointers",
   "description": "Use arrows to mark your path.",
   "authors": [
     "Pintér Gábor <pinter.gabor@gmx.at>"
@@ -12,26 +12,26 @@
     "sources": "https://gitlab.com/pintergabor/arrowpointers"
   },
   "license": "MIT",
-  "icon": "assets/arrowpointers/icons/4x_arrow_marks.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"eu.pintergabor.arrowpointers.Mod"
-		],
-		"client": [
-			"eu.pintergabor.arrowpointers.ModClient"
-		],
-		"fabric-datagen": [
-			"eu.pintergabor.arrowpointers.Datagen"
-		]
-	},
-	"mixins": [
-		"arrowpointers.mixins.json"
-	],
-	"depends": {
-		"fabricloader": ">=0.14.25",
-		"minecraft": "~1.20.2",
-		"java": ">=17",
-		"fabric-api": "*"
-	}
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "eu.pintergabor.arrowpointers.Mod"
+    ],
+    "client": [
+      "eu.pintergabor.arrowpointers.ModClient"
+    ],
+    "fabric-datagen": [
+      "eu.pintergabor.arrowpointers.Datagen"
+    ]
+  },
+  "mixins": [
+    "arrowpointers.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.1",
+    "minecraft": "~1.20.3",
+    "java": ">=17",
+    "fabric-api": "*"
+  }
 }
