@@ -15,7 +15,7 @@ Standard MIT license. Feel free to learn from it and incorporate it in your own 
 
 ## Source code
 
-[GitLab: arrowpointers.git](https://gitlab.com/pintergabor/arrowpointers.git)
+Available on [GitLab](https://gitlab.com/pintergabor/arrowpointers.git) or [GitHub](https://github.com/pinter-gabor-at/arrowpointers.git)
 
 ## For developers
 
