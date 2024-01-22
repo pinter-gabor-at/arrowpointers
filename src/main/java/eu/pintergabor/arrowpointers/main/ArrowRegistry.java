@@ -17,24 +17,21 @@ import static eu.pintergabor.arrowpointers.Global.arrowMarkBlockLumi;
 import static eu.pintergabor.arrowpointers.Global.glowArrowMarkBlockLumi;
 
 public class ArrowRegistry {
-	private ArrowRegistry() {
-		// static class
-	}
-
 	public static Block arrowMarkBlock;
 	public static Block glowArrowMarkBlock;
 
 	public static void init() {
 		arrowMarkBlock = new ArrowMarkBlock(AbstractBlock.Settings
-				.create()
-				.replaceable()
-				.noCollision()
-				.nonOpaque()
-				.sounds(BlockSoundGroup.LADDER)
-				.luminance((state) -> arrowMarkBlockLumi)
-				.postProcess(ArrowRegistry::always)
-				.emissiveLighting(ArrowRegistry::always)
-				.pistonBehavior(PistonBehavior.DESTROY));
+			.create()
+			.replaceable()
+			.noCollision()
+			.nonOpaque()
+			.sounds(BlockSoundGroup.LADDER)
+			.luminance((state) -> arrowMarkBlockLumi)
+			.postProcess(ArrowRegistry::always)
+			.emissiveLighting(ArrowRegistry::always)
+			.pistonBehavior(PistonBehavior.DESTROY)
+		);
 		glowArrowMarkBlock = new ArrowMarkBlock(AbstractBlock.Settings
 				.create()
 				.replaceable()
@@ -44,7 +41,8 @@ public class ArrowRegistry {
 				.luminance((state) -> glowArrowMarkBlockLumi)
 				.postProcess(ArrowRegistry::always)
 				.emissiveLighting(ArrowRegistry::always)
-				.pistonBehavior(PistonBehavior.DESTROY));
+				.pistonBehavior(PistonBehavior.DESTROY)
+		);
 		register();
 	}
 

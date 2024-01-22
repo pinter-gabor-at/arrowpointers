@@ -21,9 +21,6 @@ import static eu.pintergabor.arrowpointers.util.BlockRegion.MIDDLECENTER;
 import static eu.pintergabor.arrowpointers.util.BlockRegion.getClickedRegion;
 
 public class ClickAction {
-	private ClickAction() {
-		// Static class
-	}
 
 	/**
 	 * Called when the player right-clicks on a block with an ArrowItem or a
