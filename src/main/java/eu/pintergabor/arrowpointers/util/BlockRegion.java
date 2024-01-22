@@ -1,13 +1,11 @@
 package eu.pintergabor.arrowpointers.util;
 
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
 
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
+
 public class BlockRegion {
-	private BlockRegion() {
-		// Static class
-	}
 
 	@SuppressWarnings("unused")
 	public static final int TOPLEFT = 0;
@@ -46,18 +44,32 @@ public class BlockRegion {
 		return 3 * rx + ry;
 	}
 
+	/**
+	 * Calculates which region of the block was clicked
+	 * @param rx [0 … 1] = [left, center, right]
+	 * @param ry [0 … 1] = [top, center, bottom]
+	 * @return region number (top-left = 0 … bottom-right = 8)
+	 */
+	private static int blockreg3(double rx, double ry) {
+		return blockreg(Math.min(2, (int) (3 * rx)), Math.min(2, (int) (3 * ry)));
+	}
+
+	/**
+	 * Calculates which region of the block was clicked
+	 * @return region number (top-left = 0 … bottom-right = 8)
+	 */
 	public static int getClickedRegion(@NotNull Vec3d clickLocation, Direction face) {
 		final double dx = frac(clickLocation.x);
 		final double dy = frac(clickLocation.y);
 		final double dz = frac(clickLocation.z);
 
 		return switch (face) {
-			default ->
-					blockreg(Math.min(2, (int) (3 * dz)), Math.min(2, (int) (3 * dx)));
-			case NORTH, SOUTH ->
-					blockreg(Math.min(2, (int) (3 * (1 - dy))), Math.min(2, (int) (3 * dx)));
-			case WEST, EAST ->
-					blockreg(Math.min(2, (int) (3 * (1 - dy))), Math.min(2, (int) (3 * dz)));
+			default -> blockreg3(dz, dx);
+			case DOWN -> blockreg3(1 - dz, dx);
+			case NORTH -> blockreg3(1 - dy, 1 - dx);
+			case SOUTH -> blockreg3(1 - dy, dx);
+			case EAST -> blockreg3(1 - dy, 1 - dz);
+			case WEST -> blockreg3(1 - dy, dz);
 		};
 	}
 }

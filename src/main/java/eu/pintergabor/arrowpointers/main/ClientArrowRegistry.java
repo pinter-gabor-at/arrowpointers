@@ -7,9 +7,6 @@ import static eu.pintergabor.arrowpointers.main.ArrowRegistry.arrowMarkBlock;
 import static eu.pintergabor.arrowpointers.main.ArrowRegistry.glowArrowMarkBlock;
 
 public class ClientArrowRegistry {
-	private ClientArrowRegistry() {
-		// static class
-	}
 
 	public static void registerClient() {
 		BlockRenderLayerMap.INSTANCE.putBlock(arrowMarkBlock, RenderLayer.getCutout());

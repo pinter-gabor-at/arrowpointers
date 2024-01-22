@@ -1,0 +1,246 @@
+{
+  "variants": {
+    "facing=down,orientation=0": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_left",
+      "x": 180
+    },
+    "facing=down,orientation=1": {
+      "model": "arrowpointers:block/glow_arrow_mark_top",
+      "x": 180
+    },
+    "facing=down,orientation=2": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_right",
+      "x": 180
+    },
+    "facing=down,orientation=3": {
+      "model": "arrowpointers:block/glow_arrow_mark_left",
+      "x": 180
+    },
+    "facing=down,orientation=4": {
+      "model": "arrowpointers:block/glow_arrow_mark_center",
+      "x": 180
+    },
+    "facing=down,orientation=5": {
+      "model": "arrowpointers:block/glow_arrow_mark_left",
+      "x": 180,
+      "y": 180
+    },
+    "facing=down,orientation=6": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_right",
+      "x": 180,
+      "y": 180
+    },
+    "facing=down,orientation=7": {
+      "model": "arrowpointers:block/glow_arrow_mark_top",
+      "x": 180,
+      "y": 180
+    },
+    "facing=down,orientation=8": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_left",
+      "x": 180,
+      "y": 180
+    },
+    "facing=east,orientation=0": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_left",
+      "x": 270,
+      "y": 270
+    },
+    "facing=east,orientation=1": {
+      "model": "arrowpointers:block/glow_arrow_mark_top",
+      "x": 270,
+      "y": 270
+    },
+    "facing=east,orientation=2": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_right",
+      "x": 270,
+      "y": 270
+    },
+    "facing=east,orientation=3": {
+      "model": "arrowpointers:block/glow_arrow_mark_left",
+      "x": 270,
+      "y": 270
+    },
+    "facing=east,orientation=4": {
+      "model": "arrowpointers:block/glow_arrow_mark_center",
+      "x": 270,
+      "y": 270
+    },
+    "facing=east,orientation=5": {
+      "model": "arrowpointers:block/glow_arrow_mark_left",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,orientation=6": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_right",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,orientation=7": {
+      "model": "arrowpointers:block/glow_arrow_mark_top",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,orientation=8": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_left",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,orientation=0": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_left",
+      "x": 270,
+      "y": 180
+    },
+    "facing=north,orientation=1": {
+      "model": "arrowpointers:block/glow_arrow_mark_top",
+      "x": 270,
+      "y": 180
+    },
+    "facing=north,orientation=2": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_right",
+      "x": 270,
+      "y": 180
+    },
+    "facing=north,orientation=3": {
+      "model": "arrowpointers:block/glow_arrow_mark_left",
+      "x": 270,
+      "y": 180
+    },
+    "facing=north,orientation=4": {
+      "model": "arrowpointers:block/glow_arrow_mark_center",
+      "x": 270,
+      "y": 180
+    },
+    "facing=north,orientation=5": {
+      "model": "arrowpointers:block/glow_arrow_mark_left",
+      "x": 90
+    },
+    "facing=north,orientation=6": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_right",
+      "x": 90
+    },
+    "facing=north,orientation=7": {
+      "model": "arrowpointers:block/glow_arrow_mark_top",
+      "x": 90
+    },
+    "facing=north,orientation=8": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_left",
+      "x": 90
+    },
+    "facing=south,orientation=0": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_left",
+      "x": 270
+    },
+    "facing=south,orientation=1": {
+      "model": "arrowpointers:block/glow_arrow_mark_top",
+      "x": 270
+    },
+    "facing=south,orientation=2": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_right",
+      "x": 270
+    },
+    "facing=south,orientation=3": {
+      "model": "arrowpointers:block/glow_arrow_mark_left",
+      "x": 270
+    },
+    "facing=south,orientation=4": {
+      "model": "arrowpointers:block/glow_arrow_mark_center",
+      "x": 270
+    },
+    "facing=south,orientation=5": {
+      "model": "arrowpointers:block/glow_arrow_mark_left",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,orientation=6": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_right",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,orientation=7": {
+      "model": "arrowpointers:block/glow_arrow_mark_top",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,orientation=8": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_left",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,orientation=0": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_left"
+    },
+    "facing=up,orientation=1": {
+      "model": "arrowpointers:block/glow_arrow_mark_top"
+    },
+    "facing=up,orientation=2": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_right"
+    },
+    "facing=up,orientation=3": {
+      "model": "arrowpointers:block/glow_arrow_mark_left"
+    },
+    "facing=up,orientation=4": {
+      "model": "arrowpointers:block/glow_arrow_mark_center"
+    },
+    "facing=up,orientation=5": {
+      "model": "arrowpointers:block/glow_arrow_mark_left",
+      "y": 180
+    },
+    "facing=up,orientation=6": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_right",
+      "y": 180
+    },
+    "facing=up,orientation=7": {
+      "model": "arrowpointers:block/glow_arrow_mark_top",
+      "y": 180
+    },
+    "facing=up,orientation=8": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_left",
+      "y": 180
+    },
+    "facing=west,orientation=0": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_left",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,orientation=1": {
+      "model": "arrowpointers:block/glow_arrow_mark_top",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,orientation=2": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_right",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,orientation=3": {
+      "model": "arrowpointers:block/glow_arrow_mark_left",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,orientation=4": {
+      "model": "arrowpointers:block/glow_arrow_mark_center",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,orientation=5": {
+      "model": "arrowpointers:block/glow_arrow_mark_left",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,orientation=6": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_right",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,orientation=7": {
+      "model": "arrowpointers:block/glow_arrow_mark_top",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,orientation=8": {
+      "model": "arrowpointers:block/glow_arrow_mark_top_left",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
