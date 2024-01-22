@@ -1,0 +1,6 @@
+{
+  "parent": "arrowpointers:block/template_arrow_mark",
+  "textures": {
+    "texture": "arrowpointers:block/glow_arrow_mark_diagonal"
+  }
+}

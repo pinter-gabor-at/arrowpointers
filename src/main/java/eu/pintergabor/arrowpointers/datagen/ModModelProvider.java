@@ -1,5 +1,7 @@
 package eu.pintergabor.arrowpointers.datagen;
 
+import eu.pintergabor.arrowpointers.main.ArrowRegistry;
+
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
@@ -13,8 +15,9 @@ public class ModModelProvider extends FabricModelProvider {
 
 	@Override
 	public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-		//ExBlockStateModelGenerator exGenerator = new ExBlockStateModelGenerator(blockStateModelGenerator);
-		//exGenerator.registerFlat9Direction(ArrowRegistry.testArrowMarkBlock);
+		ModModelGenerator generator = new ModModelGenerator(blockStateModelGenerator);
+		generator.registerFlat9Direction(ArrowRegistry.arrowMarkBlock);
+		generator.registerFlat9Direction(ArrowRegistry.glowArrowMarkBlock);
 	}
 
 	@Override

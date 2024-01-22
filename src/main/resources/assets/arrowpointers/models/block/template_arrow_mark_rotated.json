@@ -1,0 +1,18 @@
+{
+  "ambientocclusion": true,
+  "textures": {
+    "particle": "#texture"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 0.001, 16],
+      "shade": true,
+      "faces": {
+        "up": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#texture"},
+        "down": {"uv": [0, 16, 16, 0], "rotation": 90, "texture": "#texture"}
+      }
+    }
+  ]
+}
+
