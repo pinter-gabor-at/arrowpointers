@@ -7,11 +7,11 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.loot.context.LootWorldContext;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
@@ -20,8 +20,8 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.tick.ScheduledTickView;
 
 import java.util.List;
 import java.util.Random;
@@ -31,7 +31,7 @@ import static eu.pintergabor.arrowpointers.Global.thick;
 import static eu.pintergabor.arrowpointers.util.BlockRegion.MIDDLECENTER;
 
 public class ArrowMarkBlock extends Block {
-    public static final DirectionProperty FACING = Properties.FACING;
+    public static final EnumProperty<Direction> FACING = Properties.FACING;
     public static final IntProperty ORIENTATION = IntProperty.of("orientation", 0, 8);
 
     private static final VoxelShape DOWN_AABB = Block.createCuboidShape(
@@ -61,7 +61,7 @@ public class ArrowMarkBlock extends Block {
     }
 
     @Override
-    public List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
+    protected List<ItemStack> getDroppedStacks(BlockState state, LootWorldContext.Builder builder) {
         List<ItemStack> dropStacks = super.getDroppedStacks(state, builder);
         // If orientation is center, then drop 2 arrows
         if (state.get(ORIENTATION) == MIDDLECENTER) {
@@ -108,9 +108,14 @@ public class ArrowMarkBlock extends Block {
                 .getCollisionShape(world, pos.offset(facing)), facing);
     }
 
+    /**
+     * Break, if neighboring full face block is broken
+     */
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
-                                                WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    protected BlockState getStateForNeighborUpdate(
+            BlockState state, WorldView world, ScheduledTickView tickView,
+            BlockPos pos, Direction direction, BlockPos neighborPos,
+            BlockState neighborState, net.minecraft.util.math.random.Random random) {
         boolean support = neighborPos.equals(pos.offset(state.get(FACING).getOpposite()));
         if (support) {
             if (!this.canPlaceAt(state, world, pos)) {
