@@ -3,7 +3,7 @@ package eu.pintergabor.arrowpointers.datagen;
 import eu.pintergabor.arrowpointers.Global;
 import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
 import net.minecraft.block.Block;
-import net.minecraft.data.client.*;
+import net.minecraft.client.data.*;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
