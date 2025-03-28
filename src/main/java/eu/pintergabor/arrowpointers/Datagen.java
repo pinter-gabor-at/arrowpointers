@@ -1,9 +1,11 @@
 package eu.pintergabor.arrowpointers;
 
-import eu.pintergabor.arrowpointers.datagen.ModModelProvider;
 import eu.pintergabor.arrowpointers.datagen.ModBlockLootTableGenerator;
+import eu.pintergabor.arrowpointers.datagen.ModModelProvider;
+
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+
 
 public class Datagen implements DataGeneratorEntrypoint {
 	@Override
