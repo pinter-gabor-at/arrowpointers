@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "arrowpointers",
+  "id": "${mod_id}",
   "version": "${version}",
   "name": "Arrow Pointers",
   "description": "Use arrows to mark your path.",
@@ -28,10 +28,8 @@
   "mixins": [
     "eu.pintergabor.arrowpointers.mixins.json"
   ],
-  "depends": {
-    "fabricloader": ">=0.16.9",
-    "minecraft": "~1.21.4",
-    "java": ">=21",
-    "fabric-api": "*"
-  }
+  "java": ">=21",
+  "minecraft": "${minecraft_version}",
+  "fabricloader": "${loader_version}",
+  "fabric-api": "${fabric_version}"
 }
