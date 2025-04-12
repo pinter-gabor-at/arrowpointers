@@ -2,10 +2,15 @@ package eu.pintergabor.arrowpointers.util;
 
 import org.jetbrains.annotations.NotNull;
 
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.Vec3;
 
-public class BlockRegion {
+
+public final class BlockRegion {
+
+	private BlockRegion() {
+		// Static class.
+	}
 
 	@SuppressWarnings("unused")
 	public static final int TOPLEFT = 0;
@@ -27,7 +32,8 @@ public class BlockRegion {
 	public static final int BOTTOMRIGHT = 8;
 
 	/**
-	 * Calculate the fractional part of v
+	 * Calculate the fractional part of v.
+	 *
 	 * @return Fractional part of v (always non-negative and less than 1)
 	 */
 	private static double frac(double v) {
@@ -35,41 +41,46 @@ public class BlockRegion {
 	}
 
 	/**
-	 * Calculates which region of the block was clicked
+	 * Calculates which region of the block was clicked.
+	 *
 	 * @param rx [0, 1, 2] = [left, center, right]
 	 * @param ry [0, 1, 2] = [top, center, bottom]
-	 * @return region number (top-left = 0 … bottom-right = 8)
+	 * @return region number (top-left = 0 ... bottom-right = 8)
 	 */
 	private static int blockreg(int rx, int ry) {
 		return 3 * rx + ry;
 	}
 
 	/**
-	 * Calculates which region of the block was clicked
-	 * @param rx [0 … 1] = [left, center, right]
-	 * @param ry [0 … 1] = [top, center, bottom]
-	 * @return region number (top-left = 0 … bottom-right = 8)
+	 * Calculates which region of the block was clicked.
+	 *
+	 * @param rx [0 ... 1] = [left, center, right]
+	 * @param ry [0 ... 1] = [top, center, bottom]
+	 * @return region number (top-left = 0 ... bottom-right = 8)
 	 */
 	private static int blockreg3(double rx, double ry) {
 		return blockreg(Math.min(2, (int) (3 * rx)), Math.min(2, (int) (3 * ry)));
 	}
 
 	/**
-	 * Calculates which region of the block was clicked
-	 * @return region number (top-left = 0 … bottom-right = 8)
+	 * Calculates which region of the block was clicked.
+	 * <pre>
+	 * 012
+	 * 345
+	 * 678
+	 * @return region number (top-left = 0 ... bottom-right = 8)
 	 */
-	public static int getClickedRegion(@NotNull Vec3d clickLocation, Direction face) {
+	public static int getClickedRegion(@NotNull Vec3 clickLocation, Direction face) {
 		final double dx = frac(clickLocation.x);
 		final double dy = frac(clickLocation.y);
 		final double dz = frac(clickLocation.z);
-
 		return switch (face) {
-			default -> blockreg3(dz, dx);
 			case DOWN -> blockreg3(1 - dz, dx);
 			case NORTH -> blockreg3(1 - dy, 1 - dx);
 			case SOUTH -> blockreg3(1 - dy, dx);
 			case EAST -> blockreg3(1 - dy, 1 - dz);
 			case WEST -> blockreg3(1 - dy, dz);
+			default -> blockreg3(dz, dx);
 		};
 	}
 }

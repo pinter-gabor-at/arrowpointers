@@ -5,19 +5,18 @@ import java.util.concurrent.CompletableFuture;
 import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
 import eu.pintergabor.arrowpointers.main.ArrowRegistry;
 
-import net.minecraft.item.ArrowItem;
-import net.minecraft.item.Items;
-import net.minecraft.item.SpectralArrowItem;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.core.HolderLookup;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 
+import net.minecraft.world.item.Items;
+
 
 public class ModBlockLootTableGenerator extends FabricBlockLootTableProvider {
+
 	public ModBlockLootTableGenerator(
-		FabricDataOutput dataOutput,
-		CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+		FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
 		super(dataOutput, registryLookup);
 	}
 
@@ -29,7 +28,7 @@ public class ModBlockLootTableGenerator extends FabricBlockLootTableProvider {
 	 */
 	@Override
 	public void generate() {
-		addDrop(ArrowRegistry.arrowMarkBlock, Items.ARROW);
-		addDrop(ArrowRegistry.glowArrowMarkBlock, Items.SPECTRAL_ARROW);
+		dropOther(ArrowRegistry.arrowMarkBlock, Items.ARROW);
+		dropOther(ArrowRegistry.glowArrowMarkBlock, Items.SPECTRAL_ARROW);
 	}
 }

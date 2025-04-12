@@ -2,23 +2,26 @@ package eu.pintergabor.arrowpointers.mixin;
 
 import eu.pintergabor.arrowpointers.main.ArrowRegistry;
 import eu.pintergabor.arrowpointers.util.ClickAction;
-import net.minecraft.item.ArrowItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.SpectralArrowItem;
-import net.minecraft.util.ActionResult;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
+
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.ArrowItem;
+import net.minecraft.world.item.SpectralArrowItem;
+import net.minecraft.world.item.context.UseOnContext;
+
 
 @Mixin(SpectralArrowItem.class)
 public abstract class SpectralArrowItemMixin extends ArrowItem {
 
-	public SpectralArrowItemMixin(Item.Settings settings) {
-		super(settings);
+	public SpectralArrowItemMixin(Properties props) {
+		super(props);
 	}
 
 	@Override
-	public ActionResult useOnBlock(ItemUsageContext context) {
-		return ClickAction.useOnBlock(
-				this, context, ArrowRegistry.glowArrowMarkBlock);
+	@NotNull
+	public InteractionResult useOn(UseOnContext context) {
+		return ClickAction.useOn(
+			this, context, ArrowRegistry.glowArrowMarkBlock);
 	}
 }

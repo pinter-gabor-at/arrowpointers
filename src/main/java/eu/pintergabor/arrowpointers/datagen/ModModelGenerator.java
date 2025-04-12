@@ -1,123 +1,125 @@
 package eu.pintergabor.arrowpointers.datagen;
 
-import static net.minecraft.client.data.BlockStateModelGenerator.*;
+import static net.minecraft.client.data.models.BlockModelGenerators.*;
 
 import java.util.Optional;
 
 import eu.pintergabor.arrowpointers.Global;
 import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.client.data.BlockStateVariantMap;
-import net.minecraft.client.data.Model;
-import net.minecraft.client.data.ModelIds;
-import net.minecraft.client.data.TextureKey;
-import net.minecraft.client.data.TextureMap;
-import net.minecraft.client.data.VariantsBlockModelDefinitionCreator;
-import net.minecraft.client.render.model.json.WeightedVariant;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Direction;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplate;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 
 public class ModModelGenerator {
-	private final BlockStateModelGenerator generator;
+	private final BlockModelGenerators generator;
 
-	public ModModelGenerator(BlockStateModelGenerator generator) {
+	public ModModelGenerator(BlockModelGenerators generator) {
 		this.generator = generator;
 	}
 
 	/**
-	 * Create blockstates for all directions and one orientation
+	 * Create blockstates for all directions and one orientation.
 	 *
-	 * @param map     to add the blockstates
-	 * @param modelId block model *.json file name
+	 * @param map     to add the blockstates.
+	 * @param modelId block model *.json file name.
 	 */
 	public static void registerFlatNormal(
-		BlockStateVariantMap.DoubleProperty<WeightedVariant, Direction, Integer> map,
-		int orientation, Identifier modelId) {
-		map.register(Direction.DOWN, orientation,
-			BlockStateModelGenerator.createWeightedVariant(modelId)
-				.apply(ROTATE_X_180));
-		map.register(Direction.UP, orientation,
-			BlockStateModelGenerator.createWeightedVariant(modelId));
-		map.register(Direction.NORTH, orientation,
-			BlockStateModelGenerator.createWeightedVariant(modelId)
-				.apply(ROTATE_X_270.then(ROTATE_Y_180)));
-		map.register(Direction.SOUTH, orientation,
-			BlockStateModelGenerator.createWeightedVariant(modelId)
-				.apply(ROTATE_X_270));
-		map.register(Direction.WEST, orientation,
-			BlockStateModelGenerator.createWeightedVariant(modelId)
-				.apply(ROTATE_X_270.then(ROTATE_Y_90)));
-		map.register(Direction.EAST, orientation,
-			BlockStateModelGenerator.createWeightedVariant(modelId)
-				.apply(ROTATE_X_270.then(ROTATE_Y_270)));
+		PropertyDispatch.C2<MultiVariant, Direction, Integer> map,
+		int orientation, ResourceLocation modelId) {
+		map.select(Direction.DOWN, orientation,
+			BlockModelGenerators.plainVariant(modelId)
+				.with(X_ROT_180));
+		map.select(Direction.UP, orientation,
+			BlockModelGenerators.plainVariant(modelId));
+		map.select(Direction.NORTH, orientation,
+			BlockModelGenerators.plainVariant(modelId)
+				.with(X_ROT_270.then(Y_ROT_180)));
+		map.select(Direction.SOUTH, orientation,
+			BlockModelGenerators.plainVariant(modelId)
+				.with(X_ROT_270));
+		map.select(Direction.WEST, orientation,
+			BlockModelGenerators.plainVariant(modelId)
+				.with(X_ROT_270.then(Y_ROT_90)));
+		map.select(Direction.EAST, orientation,
+			BlockModelGenerators.plainVariant(modelId)
+				.with(X_ROT_270.then(Y_ROT_270)));
 	}
 
 	/**
-	 * Create blockstates for all directions and one orientation
+	 * Create blockstates for all directions and one orientation.
 	 * <p>
-	 * Flip model 180 degree in Y direction
+	 * Flip model 180 degree in Y direction.
 	 *
-	 * @param map     to add the blockstates
-	 * @param modelId block model *.json file name
+	 * @param map     to add the blockstates.
+	 * @param modelId block model *.json file name.
 	 */
 	public static void registerFlatFlipped(
-		BlockStateVariantMap.DoubleProperty<WeightedVariant, Direction, Integer> map,
-		int orientation, Identifier modelId) {
-		map.register(Direction.DOWN, orientation,
-			BlockStateModelGenerator.createWeightedVariant(modelId)
-				.apply(ROTATE_X_180.then(ROTATE_Y_180)));
-		map.register(Direction.UP, orientation,
-			BlockStateModelGenerator.createWeightedVariant(modelId)
-				.apply(ROTATE_Y_180));
-		map.register(Direction.NORTH, orientation,
-			BlockStateModelGenerator.createWeightedVariant(modelId)
-				.apply(ROTATE_X_90));
-		map.register(Direction.SOUTH, orientation,
-			BlockStateModelGenerator.createWeightedVariant(modelId)
-				.apply(ROTATE_X_90.then(ROTATE_Y_180)));
-		map.register(Direction.WEST, orientation,
-			BlockStateModelGenerator.createWeightedVariant(modelId)
-				.apply(ROTATE_X_90.then(ROTATE_Y_270)));
-		map.register(Direction.EAST, orientation,
-			BlockStateModelGenerator.createWeightedVariant(modelId)
-				.apply(ROTATE_X_90.then(ROTATE_Y_90)));
+		PropertyDispatch.C2<MultiVariant, Direction, Integer> map,
+		int orientation, ResourceLocation modelId) {
+		map.select(Direction.DOWN, orientation,
+			BlockModelGenerators.plainVariant(modelId)
+				.with(X_ROT_180.then(Y_ROT_180)));
+		map.select(Direction.UP, orientation,
+			BlockModelGenerators.plainVariant(modelId)
+				.with(Y_ROT_180));
+		map.select(Direction.NORTH, orientation,
+			BlockModelGenerators.plainVariant(modelId)
+				.with(X_ROT_90));
+		map.select(Direction.SOUTH, orientation,
+			BlockModelGenerators.plainVariant(modelId)
+				.with(X_ROT_90.then(Y_ROT_180)));
+		map.select(Direction.WEST, orientation,
+			BlockModelGenerators.plainVariant(modelId)
+				.with(X_ROT_90.then(Y_ROT_270)));
+		map.select(Direction.EAST, orientation,
+			BlockModelGenerators.plainVariant(modelId)
+				.with(X_ROT_90.then(Y_ROT_90)));
 	}
 
 	public static final String TEMPLATE = "block/template_arrow_mark";
 	public static final String TEMPLATE_ROTATED = "block/template_arrow_mark_rotated";
 
 	/**
-	 * Create one model
+	 * Create one model.
 	 */
-	public Identifier createFlatModel(Block block, String template, String modelSuffix, String textureSuffix) {
-		Model model = new Model(Optional.of(Global.ModIdentifier(template)),
-			Optional.empty(), TextureKey.TEXTURE);
-		return generator.createSubModel(block, modelSuffix, model, identifier -> new TextureMap()
-			.put(TextureKey.TEXTURE, ModelIds.getBlockSubModelId(block, textureSuffix)));
+	public ResourceLocation createFlatModel(
+		Block block, String template, String modelSuffix, String textureSuffix) {
+		ModelTemplate model = new ModelTemplate(Optional.of(Global.modId(template)),
+			Optional.empty(), TextureSlot.TEXTURE);
+		return generator.createSuffixedVariant(block, modelSuffix, model,
+			identifier -> new TextureMapping()
+				.put(TextureSlot.TEXTURE, ModelLocationUtils.getModelLocation(block, textureSuffix)));
 	}
 
 	/**
-	 * Create models and blockstates for 6 directions and 9 orientations
+	 * Create models and blockstates for 6 directions and 9 orientations.
 	 */
-	public BlockStateVariantMap<WeightedVariant> createFlat9Direction(Block block) {
-		// Models
-		Identifier center = createFlatModel(block,
+	public PropertyDispatch<MultiVariant> createFlat9Direction(Block block) {
+		// Models.
+		ResourceLocation center = createFlatModel(block,
 			TEMPLATE, "_center", "_center");
-		Identifier topleft = createFlatModel(block,
+		ResourceLocation topleft = createFlatModel(block,
 			TEMPLATE_ROTATED, "_top_left", "_diagonal");
-		Identifier top = createFlatModel(block,
+		ResourceLocation top = createFlatModel(block,
 			TEMPLATE, "_top", "");
-		Identifier topright = createFlatModel(block,
+		ResourceLocation topright = createFlatModel(block,
 			TEMPLATE, "_top_right", "_diagonal");
-		Identifier left = createFlatModel(block,
+		ResourceLocation left = createFlatModel(block,
 			TEMPLATE_ROTATED, "_left", "");
-		// BlockStates
-		var map = BlockStateVariantMap
-			.models(Properties.FACING, ArrowMarkBlock.ORIENTATION);
+		// Block states.
+		var map = PropertyDispatch
+			.initial(BlockStateProperties.FACING, ArrowMarkBlock.ORIENTATION);
 		registerFlatNormal(map, 0, topleft);
 		registerFlatNormal(map, 1, top);
 		registerFlatNormal(map, 2, topright);
@@ -131,10 +133,11 @@ public class ModModelGenerator {
 	}
 
 	/**
-	 * Generate models and blockstates for a thin, flat model that has 6 directions and 9 orientations
+	 * Generate models and blockstates for a thin,
+	 * flat model that has 6 directions and 9 orientations.
 	 */
 	public void registerFlat9Direction(Block block) {
-		generator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator
-			.of(block).with(createFlat9Direction(block)));
+		generator.blockStateOutput.accept(MultiVariantGenerator
+			.dispatch(block).with(createFlat9Direction(block)));
 	}
 }
