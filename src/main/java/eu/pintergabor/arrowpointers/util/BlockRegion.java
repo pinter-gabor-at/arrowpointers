@@ -1,35 +1,30 @@
 package eu.pintergabor.arrowpointers.util;
 
+import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
 import org.jetbrains.annotations.NotNull;
 
 import net.minecraft.core.Direction;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.phys.Vec3;
 
 
-public final class BlockRegion {
+public enum BlockRegion implements StringRepresentable {
+	TOPLEFT("top_left"), TOPCENTER("top_center"), TOPRIGHT("top_right"),
+	MIDDLELEFT("middle_left"), MIDDLECENTER("middle_center"), MIDDLERIGHT("middle_right"),
+	BOTTOMLEFT("bottom_left"), BOTTOMCENTER("bottom_center"), BOTTOMRIGHT("bottom_right");
+	/**
+	 * Used in {@link ArrowMarkBlock} to create the {@link ArrowMarkBlock#ORIENTATION} property
+	 * and here to create enums from calculated values.
+	 */
+	public static final BlockRegion[] VALUES = BlockRegion.values();
+	/**
+	 * Internally stored name.
+	 */
+	private final String name;
 
-	private BlockRegion() {
-		// Static class.
+	BlockRegion(String name) {
+		this.name = name;
 	}
-
-	@SuppressWarnings("unused")
-	public static final int TOPLEFT = 0;
-	@SuppressWarnings("unused")
-	public static final int TOPCENTER = 1;
-	@SuppressWarnings("unused")
-	public static final int TOPRIGHT = 2;
-	@SuppressWarnings("unused")
-	public static final int MIDDLELEFT = 3;
-	@SuppressWarnings("unused")
-	public static final int MIDDLECENTER = 4;
-	@SuppressWarnings("unused")
-	public static final int MIDDLERIGHT = 5;
-	@SuppressWarnings("unused")
-	public static final int BOTTOMLEFT = 6;
-	@SuppressWarnings("unused")
-	public static final int BOTTOMCENTER = 7;
-	@SuppressWarnings("unused")
-	public static final int BOTTOMRIGHT = 8;
 
 	/**
 	 * Calculate the fractional part of v.
@@ -45,10 +40,10 @@ public final class BlockRegion {
 	 *
 	 * @param rx [0, 1, 2] = [left, center, right]
 	 * @param ry [0, 1, 2] = [top, center, bottom]
-	 * @return region number (top-left = 0 ... bottom-right = 8)
+	 * @return region.
 	 */
-	private static int blockreg(int rx, int ry) {
-		return 3 * rx + ry;
+	private static BlockRegion blockreg(int rx, int ry) {
+		return VALUES[3 * rx + ry];
 	}
 
 	/**
@@ -56,9 +51,9 @@ public final class BlockRegion {
 	 *
 	 * @param rx [0 ... 1] = [left, center, right]
 	 * @param ry [0 ... 1] = [top, center, bottom]
-	 * @return region number (top-left = 0 ... bottom-right = 8)
+	 * @return region.
 	 */
-	private static int blockreg3(double rx, double ry) {
+	private static BlockRegion blockreg3(double rx, double ry) {
 		return blockreg(Math.min(2, (int) (3 * rx)), Math.min(2, (int) (3 * ry)));
 	}
 
@@ -68,9 +63,11 @@ public final class BlockRegion {
 	 * 012
 	 * 345
 	 * 678
-	 * @return region number (top-left = 0 ... bottom-right = 8)
+	 * </pre>
+	 *
+	 * @return region.
 	 */
-	public static int getClickedRegion(@NotNull Vec3 clickLocation, Direction face) {
+	public static BlockRegion getClickedRegion(@NotNull Vec3 clickLocation, Direction face) {
 		final double dx = frac(clickLocation.x);
 		final double dy = frac(clickLocation.y);
 		final double dz = frac(clickLocation.z);
@@ -82,5 +79,11 @@ public final class BlockRegion {
 			case EAST -> blockreg3(1 - dy, 1 - dz);
 			case WEST -> blockreg3(1 - dy, dz);
 		};
+	}
+
+	@Override
+	@NotNull
+	public String getSerializedName() {
+		return name;
 	}
 }

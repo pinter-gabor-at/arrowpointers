@@ -5,6 +5,7 @@ import static eu.pintergabor.arrowpointers.util.BlockRegion.MIDDLECENTER;
 
 import java.util.List;
 
+import eu.pintergabor.arrowpointers.util.BlockRegion;
 import org.jetbrains.annotations.NotNull;
 
 import net.minecraft.core.BlockPos;
@@ -25,7 +26,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -36,8 +36,9 @@ public class ArrowMarkBlock extends Block {
 	// Properties.
 	public static final EnumProperty<Direction> FACING =
 		BlockStateProperties.FACING;
-	public static final IntegerProperty ORIENTATION =
-		IntegerProperty.create("orientation", 0, 8);
+	public static final EnumProperty<BlockRegion> ORIENTATION =
+		EnumProperty.create("orientation", BlockRegion.class,
+			List.of(BlockRegion.VALUES));
 	// Shapes.
 	private static final VoxelShape DOWN_AABB = Block.box(
 		0D, 16D - thickness, 0D, 16D, 16D, 16D);

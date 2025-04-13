@@ -34,7 +34,7 @@ public class ClickAction {
 	 */
 	@NotNull
 	private static InteractionResult placeBlock(
-		UseOnContext context, Block block, int orientation, int consume) {
+		UseOnContext context, Block block, BlockRegion orientation, int consume) {
 		final Level level = context.getLevel();
 		final BlockPos pos = context.getClickedPos();
 		final Player player = context.getPlayer();
@@ -69,7 +69,7 @@ public class ClickAction {
 	private static InteractionResult placeBlock(
 		UseOnContext context, Block block) {
 		// Normally 1 item is needed, but if orientation is center, then 2.
-		final int orientation = getClickedRegion(
+		final BlockRegion orientation = getClickedRegion(
 			context.getClickLocation(), context.getClickedFace());
 		int consume = 1;
 		if (orientation == MIDDLECENTER) {

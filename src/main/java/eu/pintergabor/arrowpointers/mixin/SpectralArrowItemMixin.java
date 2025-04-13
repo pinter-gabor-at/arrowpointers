@@ -24,7 +24,6 @@ public abstract class SpectralArrowItemMixin extends ArrowItem {
 	@Override
 	@NotNull
 	public InteractionResult useOn(UseOnContext context) {
-		return ClickAction.useOn(
-			context, ArrowRegistry.glowArrowMarkBlock);
+		return ClickAction.useOn(context, ArrowRegistry.glowArrowMarkBlock);
 	}
 }
