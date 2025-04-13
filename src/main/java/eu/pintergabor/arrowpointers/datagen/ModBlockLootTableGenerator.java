@@ -5,31 +5,33 @@ import java.util.concurrent.CompletableFuture;
 import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
 import eu.pintergabor.arrowpointers.main.ArrowRegistry;
 
-import net.minecraft.item.ArrowItem;
-import net.minecraft.item.Items;
-import net.minecraft.item.SpectralArrowItem;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.core.HolderLookup;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootParams;
+
 
 public class ModBlockLootTableGenerator extends FabricBlockLootTableProvider {
+
 	public ModBlockLootTableGenerator(
-		FabricDataOutput dataOutput,
-		CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+		FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
 		super(dataOutput, registryLookup);
 	}
 
 	/**
-	 * Breaking {@link ArrowMarkBlock} drops an {@link ArrowItem}, Breaking Glow{@link ArrowMarkBlock} drops a
-	 * {@link SpectralArrowItem}
+	 * Breaking an {@link ArrowMarkBlock} drops one or two {@link Items#ARROW},
+	 * Breaking a Glow{@link ArrowMarkBlock} drops one or two {@link Items#SPECTRAL_ARROW}.
 	 * <p>
-	 * normally 1, but if orientation is center, then 2.
+	 * Normally 1, but if orientation is center, then 2.
+	 * See {@link ArrowMarkBlock#getDrops(BlockState, LootParams.Builder)} how it is implemented.
 	 */
 	@Override
 	public void generate() {
-		addDrop(ArrowRegistry.arrowMarkBlock, Items.ARROW);
-		addDrop(ArrowRegistry.glowArrowMarkBlock, Items.SPECTRAL_ARROW);
+		dropOther(ArrowRegistry.arrowMarkBlock, Items.ARROW);
+		dropOther(ArrowRegistry.glowArrowMarkBlock, Items.SPECTRAL_ARROW);
 	}
 }

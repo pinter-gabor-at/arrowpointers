@@ -2,21 +2,28 @@ package eu.pintergabor.arrowpointers.mixin;
 
 import eu.pintergabor.arrowpointers.main.ArrowRegistry;
 import eu.pintergabor.arrowpointers.util.ClickAction;
-import net.minecraft.item.ArrowItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.util.ActionResult;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
+
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.ArrowItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.context.UseOnContext;
+
 
 @Mixin(ArrowItem.class)
 public abstract class ArrowItemMixin extends Item {
-	public ArrowItemMixin(Settings settings) {
-		super(settings);
+
+	public ArrowItemMixin(Properties props) {
+		super(props);
 	}
 
+	/**
+	 * Override the default method, which does nothing, with a custom action.
+	 */
 	@Override
-	public ActionResult useOnBlock(ItemUsageContext context) {
-		return ClickAction.useOnBlock(
-				this, context, ArrowRegistry.arrowMarkBlock);
+	@NotNull
+	public InteractionResult useOn(UseOnContext context) {
+		return ClickAction.useOn(context, ArrowRegistry.arrowMarkBlock);
 	}
 }

@@ -1,23 +1,27 @@
 package eu.pintergabor.arrowpointers.mixin;
 
-import net.minecraft.item.ArrowItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.TippedArrowItem;
-import net.minecraft.util.ActionResult;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
+
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.ArrowItem;
+import net.minecraft.world.item.TippedArrowItem;
+import net.minecraft.world.item.context.UseOnContext;
+
 
 @Mixin(TippedArrowItem.class)
 public abstract class TippedArrowItemMixin extends ArrowItem {
 
-    public TippedArrowItemMixin(Item.Settings settings) {
-        super(settings);
-    }
+	public TippedArrowItemMixin(Properties props) {
+		super(props);
+	}
 
-    @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        // Restore default action
-        return ActionResult.PASS;
-    }
-
+	/**
+	 * Restore the default action, which does nothing.
+	 */
+	@Override
+	@NotNull
+	public InteractionResult useOn(UseOnContext context) {
+		return InteractionResult.PASS;
+	}
 }

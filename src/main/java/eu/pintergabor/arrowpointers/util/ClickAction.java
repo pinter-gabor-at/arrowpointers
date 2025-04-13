@@ -1,82 +1,136 @@
 package eu.pintergabor.arrowpointers.util;
 
-import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
-
-import java.util.Random;
-
 import static eu.pintergabor.arrowpointers.util.BlockRegion.MIDDLECENTER;
 import static eu.pintergabor.arrowpointers.util.BlockRegion.getClickedRegion;
+
+import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
+import org.jetbrains.annotations.NotNull;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+
 
 public class ClickAction {
 
 	/**
-	 * Called when the player right-clicks on a block with an ArrowItem or a
-	 * SpectralArrowItem in hand.
-	 * @param item an ArrowItem or a SpectralArrowItem
-	 * @param context the context of the useOnBlock call
-	 * @param block an ArrowMarkBlock or a GlowArrowMarkBlock
-	 * @return the usual ActionResult values
+	 * Place an {@link ArrowMarkBlock} next to the clicked block on the server.
+	 *
+	 * @param context     the {@code context} of the {@code useOnBlock} call.
+	 * @param block       an {@link ArrowMarkBlock}.
+	 * @param orientation of the new {@link ArrowMarkBlock}.
+	 * @param consume     the number of items needed (1 or 2).
+	 * @return the usual InteractionResult values.
 	 */
-	public static ActionResult useOnBlock(Item item, ItemUsageContext context, Block block) {
-		final World world = context.getWorld();
-		final BlockPos pos = context.getBlockPos();
-		final BlockState clickedBlockState = world.getBlockState(pos);
-		final PlayerEntity player = context.getPlayer();
-		final ItemStack stack = context.getStack();
-		final Direction clickedFace = context.getSide();
-		final BlockPos markPosition = pos.offset(clickedFace);
-		if (world.isAir(markPosition) || world.getBlockState(markPosition).getBlock() instanceof ArrowMarkBlock) {
-			if (player != null &&
-					!Block.isFaceFullSquare(clickedBlockState.getCollisionShape(world, pos, ShapeContext.of(player)), clickedFace)) {
-				return ActionResult.PASS;
-			} else if ((!world.isAir(markPosition) && world.getBlockState(markPosition).getBlock() instanceof ArrowMarkBlock) || stack.getItem() != item) {
-				return ActionResult.PASS;
+	@NotNull
+	private static InteractionResult placeBlock(
+		UseOnContext context, Block block, BlockRegion orientation, int consume) {
+		final Level level = context.getLevel();
+		final BlockPos pos = context.getClickedPos();
+		final Player player = context.getPlayer();
+		final Direction clickedFace = context.getClickedFace();
+		final BlockPos targetPos = pos.relative(clickedFace);
+		// The new block.
+		BlockState blockState = block.defaultBlockState()
+			.setValue(ArrowMarkBlock.FACING, clickedFace)
+			.setValue(ArrowMarkBlock.ORIENTATION, orientation);
+		// Place it.
+		if (level.setBlockAndUpdate(targetPos, blockState)) {
+			if (player != null && !player.isCreative()) {
+				// Use 1 or 2 items.
+				context.getItemInHand().shrink(consume);
 			}
-
-			// Normally we need 1 item, but if orientation is center, then 2
-			final int orientation = getClickedRegion(context.getHitPos(), clickedFace);
-			int consume = 1;
-			if (orientation == MIDDLECENTER) {
-				if (stack.getCount() < 2) {
-					return ActionResult.PASS;
-				}
-				consume = 2;
-			}
-
-			if (world.isClient) {
-				return ActionResult.SUCCESS;
-			}
-
-			// The new block
-			BlockState blockState = block.getDefaultState()
-					.with(ArrowMarkBlock.FACING, clickedFace)
-					.with(ArrowMarkBlock.ORIENTATION, orientation);
-
-			// Place it
-			if (world.setBlockState(markPosition, blockState, 1 | 2)) {
-				if (player != null &&
-						!player.isCreative()) {
-					stack.decrement(consume);
-				}
-				world.playSound(null, markPosition,
-						SoundEvents.BLOCK_LADDER_BREAK, SoundCategory.BLOCKS,
-						0.5f, new Random().nextFloat() * 0.2f + 0.8f);
-				return ActionResult.CONSUME;
-			}
+			level.playSound(null, targetPos,
+				SoundEvents.LADDER_BREAK, SoundSource.BLOCKS,
+				0.5F, RandomSource.create().nextFloat() * 0.2F + 0.8F);
+			return InteractionResult.CONSUME;
 		}
-		return ActionResult.FAIL;
+		return InteractionResult.FAIL;
+	}
+
+	/**
+	 * Place an {@link ArrowMarkBlock} next to the clicked block, if possible.
+	 *
+	 * @param context the {@code context} of the {@code useOnBlock} call.
+	 * @param block   an {@link ArrowMarkBlock}.
+	 * @return the usual InteractionResult values.
+	 */
+	@NotNull
+	private static InteractionResult placeBlock(
+		UseOnContext context, Block block) {
+		// Normally 1 item is needed, but if orientation is center, then 2.
+		final BlockRegion orientation = getClickedRegion(
+			context.getClickLocation(), context.getClickedFace());
+		int consume = 1;
+		if (orientation == MIDDLECENTER) {
+			// If it is at the center.
+			if (context.getItemInHand().getCount() < 2) {
+				// If 2 items are needed, but there is only 1 available.
+				return InteractionResult.PASS;
+			}
+			consume = 2;
+		}
+		if (context.getLevel().isClientSide) {
+			return InteractionResult.SUCCESS;
+		}
+		// Place block on the server.
+		return placeBlock(context, block, orientation, consume);
+	}
+
+	/**
+	 * @return true if the arrow mark block can be placed.
+	 */
+	@SuppressWarnings("RedundantIfStatement")
+	private static boolean canPlace(UseOnContext context) {
+		final Level level = context.getLevel();
+		final BlockPos pos = context.getClickedPos();
+		final BlockState clickedBlockState = level.getBlockState(pos);
+		final Player player = context.getPlayer();
+		final Direction clickedFace = context.getClickedFace();
+		if (player == null) {
+			// If there is no player.
+			return false;
+		}
+		if (!Block.isFaceFull(clickedBlockState.getCollisionShape(
+			level, pos, CollisionContext.of(player)), clickedFace)) {
+			// If the clicked block is unsuitable for placing an arrow mark on it.
+			return false;
+		}
+		// Success: the arrow mark block can be placed.
+		return true;
+	}
+
+	/**
+	 * Called when the player right-clicks on a block with an {@link Items#ARROW}
+	 * or a {@link Items#SPECTRAL_ARROW} in hand.
+	 *
+	 * @param context the {@code context} of the {@code useOnBlock} call.
+	 * @param block   an {@link ArrowMarkBlock} corresponding to the item in hand.
+	 * @return the usual InteractionResult values.
+	 */
+	public static InteractionResult useOn(UseOnContext context, Block block) {
+		final Level level = context.getLevel();
+		final BlockPos pos = context.getClickedPos();
+		final Direction clickedFace = context.getClickedFace();
+		final BlockPos targetPos = pos.relative(clickedFace);
+		if (!level.isEmptyBlock(targetPos)) {
+			// If the target position is not empty.
+			return InteractionResult.FAIL;
+		}
+		if (!canPlace(context)) {
+			// If the arrow mark cannot be placed for any reason.
+			return InteractionResult.PASS;
+		}
+		return placeBlock(context, block);
 	}
 }
