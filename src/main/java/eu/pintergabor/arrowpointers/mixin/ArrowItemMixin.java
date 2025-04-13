@@ -23,7 +23,7 @@ public abstract class ArrowItemMixin extends Item {
 	 */
 	@Override
 	@NotNull
-	public InteractionResult useOn(UseOnContext context) {
-		return ClickAction.useOn(context, ArrowRegistry.arrowMarkBlock);
+	public InteractionResult useOn(@NotNull UseOnContext context) {
+		return ClickAction.useOn(context, ArrowRegistry.arrowMarkBlock.get());
 	}
 }

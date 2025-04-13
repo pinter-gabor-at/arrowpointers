@@ -5,33 +5,34 @@ import static eu.pintergabor.arrowpointers.Global.glowArrowMarkBlockLumi;
 
 import eu.pintergabor.arrowpointers.Global;
 import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
 
 
 public class ArrowRegistry {
-	public static Block arrowMarkBlock;
-	public static Block glowArrowMarkBlock;
+	public static final DeferredRegister.Blocks BLOCKS =
+		DeferredRegister.createBlocks(Global.MODID);
+	public static DeferredBlock<Block> arrowMarkBlock;
+	public static DeferredBlock<Block> glowArrowMarkBlock;
 
 	private static boolean always(
 		BlockState state, BlockGetter blockView, BlockPos pos) {
 		return true;
 	}
 
-	public static void init() {
-		arrowMarkBlock = Blocks.register(
-			ResourceKey.create(Registries.BLOCK, Global.modId("arrow_mark")),
+	public static void init(IEventBus modEventBus) {
+		arrowMarkBlock = BLOCKS.registerBlock(
+			"arrow_mark",
 			ArrowMarkBlock::new,
-			BlockBehaviour.Properties
+			Block.Properties
 				.of()
 				.replaceable()
 				.noCollission()
@@ -42,10 +43,10 @@ public class ArrowRegistry {
 				.emissiveRendering(ArrowRegistry::always)
 				.pushReaction(PushReaction.DESTROY)
 		);
-		glowArrowMarkBlock = Blocks.register(
-			ResourceKey.create(Registries.BLOCK, Global.modId("glow_arrow_mark")),
+		glowArrowMarkBlock = BLOCKS.registerBlock(
+			"glow_arrow_mark",
 			ArrowMarkBlock::new,
-			BlockBehaviour.Properties
+			Block.Properties
 				.of()
 				.replaceable()
 				.noCollission()
@@ -56,5 +57,6 @@ public class ArrowRegistry {
 				.emissiveRendering(ArrowRegistry::always)
 				.pushReaction(PushReaction.DESTROY)
 		);
+		BLOCKS.register(modEventBus);
 	}
 }

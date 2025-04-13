@@ -1,36 +1,39 @@
 package eu.pintergabor.arrowpointers.datagen;
 
+import eu.pintergabor.arrowpointers.Global;
 import eu.pintergabor.arrowpointers.main.ArrowRegistry;
+import org.jetbrains.annotations.NotNull;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
-
-import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-
-import net.minecraft.world.item.Items;
+import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.data.PackOutput;
 
 
-public class ModModelProvider extends FabricModelProvider {
+public class ModModelProvider extends ModelProvider {
 
-	public ModModelProvider(FabricDataOutput output) {
-		super(output);
+	public ModModelProvider(PackOutput output) {
+		super(output, Global.MODID);
 	}
 
 	/**
 	 * Generate block models and block states.
 	 */
-	@Override
-	public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
-		ModModelGenerator generator = new ModModelGenerator(blockStateModelGenerator);
-		generator.registerFlat9Direction(ArrowRegistry.arrowMarkBlock);
-		generator.registerFlat9Direction(ArrowRegistry.glowArrowMarkBlock);
+	private static void generateBlockStateModel(@NotNull BlockModelGenerators blockModels) {
+		ModModelGenerator generator = new ModModelGenerator(blockModels);
+		generator.registerFlat9Direction(ArrowRegistry.arrowMarkBlock.get());
+		generator.registerFlat9Direction(ArrowRegistry.glowArrowMarkBlock.get());
 	}
 
 	/**
-	 * Only vanilla {@link Items#ARROW} items are used in this mod.
+	 * Generate blockstates, block and item models.
 	 */
 	@Override
-	public void generateItemModels(ItemModelGenerators itemModelGenerator) {
+	protected void registerModels(
+		@NotNull BlockModelGenerators blockModels,
+		@NotNull ItemModelGenerators itemModels) {
+		// No items, because only vanilla items are used in this mod.
+		// Block models and block states.
+		generateBlockStateModel(blockModels);
 	}
 }

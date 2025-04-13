@@ -21,7 +21,7 @@ public abstract class TippedArrowItemMixin extends ArrowItem {
 	 */
 	@Override
 	@NotNull
-	public InteractionResult useOn(UseOnContext context) {
+	public InteractionResult useOn(@NotNull UseOnContext context) {
 		return InteractionResult.PASS;
 	}
 }

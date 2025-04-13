@@ -1,14 +1,20 @@
 package eu.pintergabor.arrowpointers;
 
-import eu.pintergabor.arrowpointers.main.ClientArrowRegistry;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
 
-import net.fabricmc.api.ClientModInitializer;
 
+/**
+ * Client side startup.
+ */
+@Mod(value = Global.MODID, dist = Dist.CLIENT)
+public final class ModClient {
 
-public class ModClient implements ClientModInitializer {
-
-	@Override
-	public void onInitializeClient() {
-		ClientArrowRegistry.registerClient();
+	@SuppressWarnings("unused")
+	public ModClient(IEventBus modEventBus, ModContainer modContainer) {
+		// Data generator.
+		modEventBus.addListener(DataGen::init);
 	}
 }

@@ -1,0 +1,30 @@
+# Mod loader.
+modLoader = "javafml"
+loaderVersion = "[6,)"
+
+# License.
+license = "MIT"
+
+# Mod parameters.
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "Arrow Pointers"
+description = "Use arrows to mark your way."
+authors = "Pintér Gábor <pinter.gabor@gmx.at>"
+displayURL = "https://pintergabor.eu/en/minecraft/mods/${mod_id}/"
+logoFile = "${mod_group}.icon.png"
+
+# Dependencies.
+[[dependencies.${ mod_id }]]
+modId = "neoforge"
+type = "required"
+versionRange = "[${neo_version},)"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies.${ mod_id }]]
+modId = "minecraft"
+type = "required"
+versionRange = "[${minecraft_version}]"
+ordering = "NONE"
+side = "BOTH"
