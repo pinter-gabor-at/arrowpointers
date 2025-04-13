@@ -16,10 +16,12 @@ public abstract class TippedArrowItemMixin extends ArrowItem {
 		super(props);
 	}
 
+	/**
+	 * Restore the default action, which does nothing.
+	 */
 	@Override
 	@NotNull
 	public InteractionResult useOn(UseOnContext context) {
-		// Restore default action.
 		return InteractionResult.PASS;
 	}
 }

@@ -10,6 +10,9 @@ import net.minecraft.client.renderer.RenderType;
 
 public class ClientArrowRegistry {
 
+	/**
+	 * Arrow marks are partly transparent.
+	 */
 	public static void registerClient() {
 		BlockRenderLayerMap.INSTANCE.putBlock(
 			arrowMarkBlock, RenderType.cutout());

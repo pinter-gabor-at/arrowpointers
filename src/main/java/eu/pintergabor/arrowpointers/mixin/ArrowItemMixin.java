@@ -18,10 +18,13 @@ public abstract class ArrowItemMixin extends Item {
 		super(props);
 	}
 
+	/**
+	 * Override the default method, which does nothing, with a custom action.
+	 */
 	@Override
 	@NotNull
 	public InteractionResult useOn(UseOnContext context) {
 		return ClickAction.useOn(
-			this, context, ArrowRegistry.arrowMarkBlock);
+			context, ArrowRegistry.arrowMarkBlock);
 	}
 }

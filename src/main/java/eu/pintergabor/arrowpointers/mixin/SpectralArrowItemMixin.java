@@ -18,10 +18,13 @@ public abstract class SpectralArrowItemMixin extends ArrowItem {
 		super(props);
 	}
 
+	/**
+	 * Override the default method, which does nothing, with a custom action.
+	 */
 	@Override
 	@NotNull
 	public InteractionResult useOn(UseOnContext context) {
 		return ClickAction.useOn(
-			this, context, ArrowRegistry.glowArrowMarkBlock);
+			context, ArrowRegistry.glowArrowMarkBlock);
 	}
 }

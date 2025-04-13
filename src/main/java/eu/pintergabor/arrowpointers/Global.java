@@ -21,8 +21,6 @@ public final class Global {
 
 	// Parameters, some of which one day might be player configurable.
 
-	// ArrowMarkBlock hitbox margin: 0 ... 2.
-	public static final double margin = 0D;
 	// ArrowMarkBlock hitbox thickness: 0.001 ... 2.
 	public static final double thickness = 0.001D;
 

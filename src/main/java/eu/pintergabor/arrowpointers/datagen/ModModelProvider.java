@@ -8,6 +8,8 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 
+import net.minecraft.world.item.Items;
+
 
 public class ModModelProvider extends FabricModelProvider {
 
@@ -26,7 +28,7 @@ public class ModModelProvider extends FabricModelProvider {
 	}
 
 	/**
-	 * Only vanilla arrow items are used in this mod.
+	 * Only vanilla {@link Items#ARROW} items are used in this mod.
 	 */
 	@Override
 	public void generateItemModels(ItemModelGenerators itemModelGenerator) {

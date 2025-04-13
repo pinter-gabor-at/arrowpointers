@@ -1,6 +1,5 @@
 package eu.pintergabor.arrowpointers.blocks;
 
-import static eu.pintergabor.arrowpointers.Global.margin;
 import static eu.pintergabor.arrowpointers.Global.thickness;
 import static eu.pintergabor.arrowpointers.util.BlockRegion.MIDDLECENTER;
 
@@ -41,17 +40,17 @@ public class ArrowMarkBlock extends Block {
 		IntegerProperty.create("orientation", 0, 8);
 	// Shapes.
 	private static final VoxelShape DOWN_AABB = Block.box(
-		margin, 16D - thickness, margin, 16D - margin, 16D, 16D - margin);
+		0D, 16D - thickness, 0D, 16D, 16D, 16D);
 	private static final VoxelShape UP_AABB = Block.box(
-		margin, 0D, margin, 16D - margin, thickness, 16D - margin);
+		0D, 0D, 0D, 16D, thickness, 16D);
 	private static final VoxelShape SOUTH_AABB = Block.box(
-		margin, margin, 0D, 16D - margin, 16D - margin, thickness);
+		0D, 0D, 0D, 16D, 16D, thickness);
 	private static final VoxelShape EAST_AABB = Block.box(
-		0D, margin, margin, thickness, 16D - margin, 16D - margin);
+		0D, 0D, 0D, thickness, 16D, 16D);
 	private static final VoxelShape WEST_AABB = Block.box(
-		16D - thickness, margin, margin, 16D, 16D - margin, 16D - margin);
+		16D - thickness, 0D, 0D, 16D, 16D, 16D);
 	private static final VoxelShape NORTH_AABB = Block.box(
-		margin, margin, 16D - thickness, 16D - margin, 16D - margin, 16D);
+		0D, 0D, 16D - thickness, 16D, 16D, 16D);
 
 	public ArrowMarkBlock(Properties props) {
 		super(props);
@@ -72,7 +71,7 @@ public class ArrowMarkBlock extends Block {
 	protected List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 		List<ItemStack> dropStacks = super.getDrops(state, builder);
 		// If orientation is center, then drop 2 arrows.
-		if (state.getValue(ORIENTATION)==MIDDLECENTER) {
+		if (state.getValue(ORIENTATION) == MIDDLECENTER) {
 			dropStacks.getFirst().setCount(2);
 		}
 		return dropStacks;
