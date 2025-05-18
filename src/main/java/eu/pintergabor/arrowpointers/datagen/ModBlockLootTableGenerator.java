@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 
 
-public class ModBlockLootTableGenerator extends BlockLootSubProvider {
+public final class ModBlockLootTableGenerator extends BlockLootSubProvider {
 
 	public ModBlockLootTableGenerator(HolderLookup.Provider lookupProvider) {
 		super(Set.of(), FeatureFlags.DEFAULT_FLAGS, lookupProvider);

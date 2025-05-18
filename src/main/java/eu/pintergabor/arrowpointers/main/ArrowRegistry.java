@@ -17,14 +17,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
 
 
-public class ArrowRegistry {
+public final class ArrowRegistry {
 	public static final DeferredRegister.Blocks BLOCKS =
 		DeferredRegister.createBlocks(Global.MODID);
 	public static DeferredBlock<Block> arrowMarkBlock;
 	public static DeferredBlock<Block> glowArrowMarkBlock;
 
 	private static boolean always(
-		BlockState state, BlockGetter blockView, BlockPos pos) {
+		BlockState state, BlockGetter blockView, BlockPos pos
+	) {
 		return true;
 	}
 

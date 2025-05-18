@@ -10,7 +10,7 @@ import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.data.PackOutput;
 
 
-public class ModModelProvider extends ModelProvider {
+public final class ModModelProvider extends ModelProvider {
 
 	public ModModelProvider(PackOutput output) {
 		super(output, Global.MODID);
@@ -31,7 +31,8 @@ public class ModModelProvider extends ModelProvider {
 	@Override
 	protected void registerModels(
 		@NotNull BlockModelGenerators blockModels,
-		@NotNull ItemModelGenerators itemModels) {
+		@NotNull ItemModelGenerators itemModels
+	) {
 		// No items, because only vanilla items are used in this mod.
 		// Block models and block states.
 		generateBlockStateModel(blockModels);

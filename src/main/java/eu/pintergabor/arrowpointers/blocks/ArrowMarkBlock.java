@@ -32,7 +32,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 
-public class ArrowMarkBlock extends Block {
+public final class ArrowMarkBlock extends Block {
 	// Properties.
 	public static final EnumProperty<Direction> FACING =
 		BlockStateProperties.FACING;
@@ -62,7 +62,8 @@ public class ArrowMarkBlock extends Block {
 
 	@Override
 	protected void createBlockStateDefinition(
-		StateDefinition.Builder<Block, BlockState> builder) {
+		StateDefinition.Builder<Block, BlockState> builder
+	) {
 		builder.add(FACING, ORIENTATION);
 		super.createBlockStateDefinition(builder);
 	}
@@ -70,7 +71,8 @@ public class ArrowMarkBlock extends Block {
 	@Override
 	@NotNull
 	protected List<ItemStack> getDrops(
-		@NotNull BlockState state, @NotNull LootParams.Builder builder) {
+		@NotNull BlockState state, @NotNull LootParams.Builder builder
+	) {
 		List<ItemStack> dropStacks = super.getDrops(state, builder);
 		// If orientation is center, then drop 2 arrows.
 		if (state.getValue(ORIENTATION) == MIDDLECENTER) {
@@ -82,7 +84,8 @@ public class ArrowMarkBlock extends Block {
 	@Override
 	protected void spawnDestroyParticles(
 		@NotNull Level level, @NotNull Player player,
-		@NotNull BlockPos pos, @NotNull BlockState state) {
+		@NotNull BlockPos pos, @NotNull BlockState state
+	) {
 		if (!level.isClientSide) {
 			level.playSound(null, pos,
 				SoundEvents.MOSS_CARPET_BREAK, SoundSource.BLOCKS,
@@ -97,7 +100,8 @@ public class ArrowMarkBlock extends Block {
 	@NotNull
 	public VoxelShape getShape(
 		@NotNull BlockState state, @NotNull BlockGetter level,
-		@NotNull BlockPos pos, @NotNull CollisionContext context) {
+		@NotNull BlockPos pos, @NotNull CollisionContext context
+	) {
 		return switch (state.getValue(FACING)) {
 			case UP -> UP_AABB;
 			case DOWN -> DOWN_AABB;
@@ -115,7 +119,8 @@ public class ArrowMarkBlock extends Block {
 	@NotNull
 	public VoxelShape getCollisionShape(
 		@NotNull BlockState state, @NotNull BlockGetter level,
-		@NotNull BlockPos pos, @NotNull CollisionContext context) {
+		@NotNull BlockPos pos, @NotNull CollisionContext context
+	) {
 		return Shapes.empty();
 	}
 
@@ -124,7 +129,8 @@ public class ArrowMarkBlock extends Block {
 	 */
 	@Override
 	public boolean canBeReplaced(
-		@NotNull BlockState state, @NotNull BlockPlaceContext context) {
+		@NotNull BlockState state, @NotNull BlockPlaceContext context
+	) {
 		return true;
 	}
 
@@ -133,8 +139,9 @@ public class ArrowMarkBlock extends Block {
 	 */
 	@Override
 	public boolean canSurvive(
-		@NotNull BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
-		Direction facing = state.getValue(FACING);
+		@NotNull BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos
+	) {
+		final Direction facing = state.getValue(FACING);
 		return Block.isFaceFull(level.getBlockState(pos.relative(facing.getOpposite()))
 			.getCollisionShape(level, pos.relative(facing)), facing);
 	}
@@ -147,9 +154,10 @@ public class ArrowMarkBlock extends Block {
 	protected BlockState updateShape(
 		@NotNull BlockState state, @NotNull LevelReader level, @NotNull ScheduledTickAccess tickView,
 		@NotNull BlockPos pos, @NotNull Direction direction, @NotNull BlockPos neighborPos,
-		@NotNull BlockState neighborState, @NotNull RandomSource random) {
-		BlockPos supportPos = pos.relative(state.getValue(FACING).getOpposite());
-		boolean support = neighborPos.equals(supportPos);
+		@NotNull BlockState neighborState, @NotNull RandomSource random
+	) {
+		final BlockPos supportPos = pos.relative(state.getValue(FACING).getOpposite());
+		final boolean support = neighborPos.equals(supportPos);
 		if (support) {
 			if (!canSurvive(state, level, pos)) {
 				return Blocks.AIR.defaultBlockState();

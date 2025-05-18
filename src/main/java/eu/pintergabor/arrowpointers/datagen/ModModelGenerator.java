@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 
-public class ModModelGenerator {
+public final class ModModelGenerator {
 	private final BlockModelGenerators generator;
 
 	public ModModelGenerator(BlockModelGenerators generator) {
@@ -38,7 +38,8 @@ public class ModModelGenerator {
 	 */
 	public static void registerFlatNormal(
 		PropertyDispatch.C2<MultiVariant, Direction, BlockRegion> map,
-		BlockRegion orientation, ResourceLocation modelId) {
+		BlockRegion orientation, ResourceLocation modelId
+	) {
 		map.select(Direction.DOWN, orientation,
 			BlockModelGenerators.plainVariant(modelId)
 				.with(X_ROT_180));
@@ -68,7 +69,8 @@ public class ModModelGenerator {
 	 */
 	public static void registerFlatFlipped(
 		PropertyDispatch.C2<MultiVariant, Direction, BlockRegion> map,
-		BlockRegion orientation, ResourceLocation modelId) {
+		BlockRegion orientation, ResourceLocation modelId
+	) {
 		map.select(Direction.DOWN, orientation,
 			BlockModelGenerators.plainVariant(modelId)
 				.with(X_ROT_180.then(Y_ROT_180)));
@@ -96,8 +98,9 @@ public class ModModelGenerator {
 	 * Create one model.
 	 */
 	public ResourceLocation createFlatModel(
-		Block block, String template, String modelSuffix, String textureSuffix) {
-		ModelTemplate model = new ModelTemplate(Optional.of(Global.modId(template)),
+		Block block, String template, String modelSuffix, String textureSuffix
+	) {
+		final ModelTemplate model = new ModelTemplate(Optional.of(Global.modId(template)),
 			Optional.empty(), TextureSlot.TEXTURE);
 		return generator.createSuffixedVariant(block, modelSuffix, model,
 			identifier -> new TextureMapping()
@@ -109,18 +112,18 @@ public class ModModelGenerator {
 	 */
 	public PropertyDispatch<MultiVariant> createFlat9Direction(Block block) {
 		// Models.
-		ResourceLocation center = createFlatModel(block,
+		final ResourceLocation center = createFlatModel(block,
 			TEMPLATE, "_center", "_center");
-		ResourceLocation topleft = createFlatModel(block,
+		final ResourceLocation topleft = createFlatModel(block,
 			TEMPLATE_ROTATED, "_top_left", "_diagonal");
-		ResourceLocation top = createFlatModel(block,
+		final ResourceLocation top = createFlatModel(block,
 			TEMPLATE, "_top", "");
-		ResourceLocation topright = createFlatModel(block,
+		final ResourceLocation topright = createFlatModel(block,
 			TEMPLATE, "_top_right", "_diagonal");
-		ResourceLocation left = createFlatModel(block,
+		final ResourceLocation left = createFlatModel(block,
 			TEMPLATE_ROTATED, "_left", "");
 		// Block states.
-		var map = PropertyDispatch
+		final var map = PropertyDispatch
 			.initial(BlockStateProperties.FACING, ArrowMarkBlock.ORIENTATION);
 		registerFlatNormal(map, BlockRegion.TOPLEFT, topleft);
 		registerFlatNormal(map, BlockRegion.TOPCENTER, top);
