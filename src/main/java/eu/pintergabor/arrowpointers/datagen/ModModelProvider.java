@@ -11,7 +11,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.world.item.Items;
 
 
-public class ModModelProvider extends FabricModelProvider {
+public final class ModModelProvider extends FabricModelProvider {
 
 	public ModModelProvider(FabricDataOutput output) {
 		super(output);
@@ -22,7 +22,7 @@ public class ModModelProvider extends FabricModelProvider {
 	 */
 	@Override
 	public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
-		ModModelGenerator generator = new ModModelGenerator(blockStateModelGenerator);
+		final ModModelGenerator generator = new ModModelGenerator(blockStateModelGenerator);
 		generator.registerFlat9Direction(ArrowRegistry.arrowMarkBlock);
 		generator.registerFlat9Direction(ArrowRegistry.glowArrowMarkBlock);
 	}

@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
 
 
-public class ArrowRegistry {
+public final class ArrowRegistry {
 	public static Block arrowMarkBlock;
 	public static Block glowArrowMarkBlock;
 

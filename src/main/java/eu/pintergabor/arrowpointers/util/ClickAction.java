@@ -21,7 +21,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 
 
-public class ClickAction {
+public final class ClickAction {
+
+	private ClickAction() {
+		// Static class.
+	}
 
 	/**
 	 * Place an {@link ArrowMarkBlock} next to the clicked block on the server.
@@ -34,7 +38,8 @@ public class ClickAction {
 	 */
 	@NotNull
 	private static InteractionResult placeBlock(
-		UseOnContext context, Block block, BlockRegion orientation, int consume) {
+		UseOnContext context, Block block, BlockRegion orientation, int consume
+	) {
 		final Level level = context.getLevel();
 		final BlockPos pos = context.getClickedPos();
 		final Player player = context.getPlayer();
@@ -67,7 +72,8 @@ public class ClickAction {
 	 */
 	@NotNull
 	private static InteractionResult placeBlock(
-		UseOnContext context, Block block) {
+		UseOnContext context, Block block
+	) {
 		// Normally 1 item is needed, but if orientation is center, then 2.
 		final BlockRegion orientation = getClickedRegion(
 			context.getClickLocation(), context.getClickedFace());

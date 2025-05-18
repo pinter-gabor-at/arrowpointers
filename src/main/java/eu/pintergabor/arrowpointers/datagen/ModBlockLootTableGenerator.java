@@ -15,10 +15,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 
 
-public class ModBlockLootTableGenerator extends FabricBlockLootTableProvider {
+public final class ModBlockLootTableGenerator extends FabricBlockLootTableProvider {
 
 	public ModBlockLootTableGenerator(
-		FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+		FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup
+	) {
 		super(dataOutput, registryLookup);
 	}
 
