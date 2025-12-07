@@ -33,7 +33,7 @@ public final class ArrowRegistry {
 		arrowMarkBlock = BLOCKS.registerBlock(
 			"arrow_mark",
 			ArrowMarkBlock::new,
-			Block.Properties
+			() -> Block.Properties
 				.of()
 				.replaceable()
 				.noCollision()
@@ -47,7 +47,7 @@ public final class ArrowRegistry {
 		glowArrowMarkBlock = BLOCKS.registerBlock(
 			"glow_arrow_mark",
 			ArrowMarkBlock::new,
-			Block.Properties
+			() -> Block.Properties
 				.of()
 				.replaceable()
 				.noCollision()
