@@ -5,6 +5,9 @@ import org.apache.logging.log4j.Logger;
 
 import net.minecraft.resources.ResourceLocation;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 
 public final class Global {
 
@@ -34,8 +37,9 @@ public final class Global {
 	 *
 	 * @param path Name without {@link #MODID}.
 	 */
+	@Contract("_ -> new")
 	@SuppressWarnings("unused")
-	public static ResourceLocation modId(String path) {
+	public static @NotNull ResourceLocation modId(String path) {
 		return ResourceLocation.fromNamespaceAndPath(MODID, path);
 	}
 }
