@@ -38,7 +38,8 @@ public final class ClickAction {
 	 */
 	@NotNull
 	private static InteractionResult placeBlock(
-		UseOnContext context, Block block, BlockRegion orientation, int consume
+		@NotNull UseOnContext context, @NotNull Block block,
+		@NotNull BlockRegion orientation, int consume
 	) {
 		final Level level = context.getLevel();
 		final BlockPos pos = context.getClickedPos();
@@ -72,7 +73,7 @@ public final class ClickAction {
 	 */
 	@NotNull
 	private static InteractionResult placeBlock(
-		UseOnContext context, Block block
+		@NotNull UseOnContext context, @NotNull Block block
 	) {
 		// Normally 1 item is needed, but if orientation is center, then 2.
 		final BlockRegion orientation = getClickedRegion(
@@ -86,7 +87,7 @@ public final class ClickAction {
 			}
 			consume = 2;
 		}
-		if (context.getLevel().isClientSide) {
+		if (context.getLevel().isClientSide()) {
 			return InteractionResult.SUCCESS;
 		}
 		// Place block on the server.
@@ -97,7 +98,7 @@ public final class ClickAction {
 	 * @return true if the arrow mark block can be placed.
 	 */
 	@SuppressWarnings("RedundantIfStatement")
-	private static boolean canPlace(UseOnContext context) {
+	private static boolean canPlace(@NotNull UseOnContext context) {
 		final Level level = context.getLevel();
 		final BlockPos pos = context.getClickedPos();
 		final BlockState clickedBlockState = level.getBlockState(pos);
@@ -124,7 +125,7 @@ public final class ClickAction {
 	 * @param block   an {@link ArrowMarkBlock} corresponding to the item in hand.
 	 * @return the usual InteractionResult values.
 	 */
-	public static InteractionResult useOn(UseOnContext context, Block block) {
+	public static InteractionResult useOn(@NotNull UseOnContext context, @NotNull Block block) {
 		final Level level = context.getLevel();
 		final BlockPos pos = context.getClickedPos();
 		final Direction clickedFace = context.getClickedFace();
