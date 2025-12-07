@@ -9,6 +9,6 @@ public final class ModClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		ClientArrowRegistry.registerClient();
+		ClientArrowRegistry.init();
 	}
 }
