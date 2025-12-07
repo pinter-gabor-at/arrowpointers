@@ -62,7 +62,7 @@ public final class ArrowMarkBlock extends Block {
 
 	@Override
 	protected void createBlockStateDefinition(
-		StateDefinition.Builder<Block, BlockState> builder
+		@NotNull StateDefinition.Builder<Block, BlockState> builder
 	) {
 		builder.add(FACING, ORIENTATION);
 		super.createBlockStateDefinition(builder);
@@ -73,7 +73,7 @@ public final class ArrowMarkBlock extends Block {
 	protected List<ItemStack> getDrops(
 		@NotNull BlockState state, @NotNull LootParams.Builder builder
 	) {
-		List<ItemStack> dropStacks = super.getDrops(state, builder);
+		final List<ItemStack> dropStacks = super.getDrops(state, builder);
 		// If orientation is center, then drop 2 arrows.
 		if (state.getValue(ORIENTATION) == MIDDLECENTER) {
 			dropStacks.getFirst().setCount(2);
@@ -83,10 +83,12 @@ public final class ArrowMarkBlock extends Block {
 
 	@Override
 	protected void spawnDestroyParticles(
-		@NotNull Level level, @NotNull Player player,
-		@NotNull BlockPos pos, @NotNull BlockState state
+		@NotNull Level level,
+		@NotNull Player player,
+		@NotNull BlockPos pos,
+		@NotNull BlockState state
 	) {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			level.playSound(null, pos,
 				SoundEvents.MOSS_CARPET_BREAK, SoundSource.BLOCKS,
 				0.5F, RandomSource.create().nextFloat() * 0.2F + 0.8F);
@@ -97,10 +99,11 @@ public final class ArrowMarkBlock extends Block {
 	 * Thin, flat outline shape.
 	 */
 	@Override
-	@NotNull
-	public VoxelShape getShape(
-		@NotNull BlockState state, @NotNull BlockGetter level,
-		@NotNull BlockPos pos, @NotNull CollisionContext context
+	public @NotNull VoxelShape getShape(
+		@NotNull BlockState state,
+		@NotNull BlockGetter level,
+		@NotNull BlockPos pos,
+		@NotNull CollisionContext context
 	) {
 		return switch (state.getValue(FACING)) {
 			case UP -> UP_AABB;
@@ -116,10 +119,11 @@ public final class ArrowMarkBlock extends Block {
 	 * Unconditional pass-through.
 	 */
 	@Override
-	@NotNull
-	public VoxelShape getCollisionShape(
-		@NotNull BlockState state, @NotNull BlockGetter level,
-		@NotNull BlockPos pos, @NotNull CollisionContext context
+	public @NotNull VoxelShape getCollisionShape(
+		@NotNull BlockState state,
+		@NotNull BlockGetter level,
+		@NotNull BlockPos pos,
+		@NotNull CollisionContext context
 	) {
 		return Shapes.empty();
 	}
