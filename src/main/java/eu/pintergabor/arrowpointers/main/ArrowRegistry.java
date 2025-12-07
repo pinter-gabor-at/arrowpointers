@@ -34,7 +34,7 @@ public final class ArrowRegistry {
 			BlockBehaviour.Properties
 				.of()
 				.replaceable()
-				.noCollission()
+				.noCollision()
 				.noOcclusion()
 				.sound(SoundType.LADDER)
 				.lightLevel((state) -> arrowMarkBlockLumi)
@@ -48,7 +48,7 @@ public final class ArrowRegistry {
 			BlockBehaviour.Properties
 				.of()
 				.replaceable()
-				.noCollission()
+				.noCollision()
 				.noOcclusion()
 				.sound(SoundType.LADDER)
 				.lightLevel((state) -> glowArrowMarkBlockLumi)
