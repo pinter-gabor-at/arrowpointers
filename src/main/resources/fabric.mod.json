@@ -22,7 +22,7 @@
       "eu.pintergabor.arrowpointers.ModClient"
     ],
     "fabric-datagen": [
-      "eu.pintergabor.arrowpointers.Datagen"
+      "eu.pintergabor.arrowpointers.ModDataGenerator"
     ]
   },
   "mixins": [
