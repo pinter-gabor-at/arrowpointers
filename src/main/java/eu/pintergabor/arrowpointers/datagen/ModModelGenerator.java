@@ -18,7 +18,7 @@ import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
@@ -38,7 +38,7 @@ public final class ModModelGenerator {
 	 */
 	public static void registerFlatNormal(
 		PropertyDispatch.C2<MultiVariant, Direction, BlockRegion> map,
-		BlockRegion orientation, ResourceLocation modelId
+		BlockRegion orientation, Identifier modelId
 	) {
 		map.select(Direction.DOWN, orientation,
 			BlockModelGenerators.plainVariant(modelId)
@@ -69,7 +69,7 @@ public final class ModModelGenerator {
 	 */
 	public static void registerFlatFlipped(
 		PropertyDispatch.C2<MultiVariant, Direction, BlockRegion> map,
-		BlockRegion orientation, ResourceLocation modelId
+		BlockRegion orientation, Identifier modelId
 	) {
 		map.select(Direction.DOWN, orientation,
 			BlockModelGenerators.plainVariant(modelId)
@@ -97,7 +97,7 @@ public final class ModModelGenerator {
 	/**
 	 * Create one model.
 	 */
-	public ResourceLocation createFlatModel(
+	public Identifier createFlatModel(
 		Block block, String template, String modelSuffix, String textureSuffix
 	) {
 		final ModelTemplate model = new ModelTemplate(Optional.of(Global.modId(template)),
@@ -112,15 +112,15 @@ public final class ModModelGenerator {
 	 */
 	public PropertyDispatch<MultiVariant> createFlat9Direction(Block block) {
 		// Models.
-		final ResourceLocation center = createFlatModel(block,
+		final Identifier center = createFlatModel(block,
 			TEMPLATE, "_center", "_center");
-		final ResourceLocation topleft = createFlatModel(block,
+		final Identifier topleft = createFlatModel(block,
 			TEMPLATE_ROTATED, "_top_left", "_diagonal");
-		final ResourceLocation top = createFlatModel(block,
+		final Identifier top = createFlatModel(block,
 			TEMPLATE, "_top", "");
-		final ResourceLocation topright = createFlatModel(block,
+		final Identifier topright = createFlatModel(block,
 			TEMPLATE, "_top_right", "_diagonal");
-		final ResourceLocation left = createFlatModel(block,
+		final Identifier left = createFlatModel(block,
 			TEMPLATE_ROTATED, "_left", "");
 		// Block states.
 		final var map = PropertyDispatch

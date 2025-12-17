@@ -11,7 +11,7 @@ import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 
-public final class DataGen {
+public final class ModDataGenerator {
 
 	public static void init(GatherDataEvent.Client event) {
 		// Create models.

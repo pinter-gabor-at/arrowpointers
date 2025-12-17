@@ -15,6 +15,6 @@ public final class ModClient {
 	@SuppressWarnings("unused")
 	public ModClient(IEventBus modEventBus, ModContainer modContainer) {
 		// Data generator.
-		modEventBus.addListener(DataGen::init);
+		modEventBus.addListener(ModDataGenerator::init);
 	}
 }
