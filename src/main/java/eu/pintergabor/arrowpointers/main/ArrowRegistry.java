@@ -5,31 +5,19 @@ import static eu.pintergabor.arrowpointers.Global.glowArrowMarkBlockLumi;
 
 import eu.pintergabor.arrowpointers.Global;
 import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
-import org.jspecify.annotations.NonNull;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
 
 
 public final class ArrowRegistry {
 	public static Block arrowMarkBlock;
 	public static Block glowArrowMarkBlock;
-
-	private static boolean always(
-		final @NonNull BlockState state,
-		final @NonNull BlockGetter blockView,
-		final @NonNull BlockPos pos
-	) {
-		return true;
-	}
 
 	public static void init() {
 		arrowMarkBlock = Blocks.register(
@@ -42,7 +30,7 @@ public final class ArrowRegistry {
 				.noOcclusion()
 				.sound(SoundType.LADDER)
 				.lightLevel((_) -> arrowMarkBlockLumi)
-				.emissiveRendering(ArrowRegistry::always)
+				.emissiveRendering(_ -> true)
 				.pushReaction(PushReaction.DESTROY)
 		);
 		glowArrowMarkBlock = Blocks.register(
@@ -55,7 +43,7 @@ public final class ArrowRegistry {
 				.noOcclusion()
 				.sound(SoundType.LADDER)
 				.lightLevel((_) -> glowArrowMarkBlockLumi)
-				.emissiveRendering(ArrowRegistry::always)
+				.emissiveRendering(_ -> true)
 				.pushReaction(PushReaction.DESTROY)
 		);
 	}
