@@ -1,6 +1,6 @@
 package eu.pintergabor.arrowpointers.mixin;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import org.spongepowered.asm.mixin.Mixin;
 
 import net.minecraft.world.InteractionResult;
@@ -20,8 +20,7 @@ public abstract class TippedArrowItemMixin extends ArrowItem {
 	 * Restore the default action, which does nothing.
 	 */
 	@Override
-	@NotNull
-	public InteractionResult useOn(UseOnContext context) {
+	public @NonNull InteractionResult useOn(final @NonNull UseOnContext context) {
 		return InteractionResult.PASS;
 	}
 }

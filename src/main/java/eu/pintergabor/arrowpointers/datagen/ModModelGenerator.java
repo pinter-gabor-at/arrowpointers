@@ -6,17 +6,17 @@ import java.util.Optional;
 
 import eu.pintergabor.arrowpointers.Global;
 import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
-
 import eu.pintergabor.arrowpointers.util.BlockRegion;
+import org.jspecify.annotations.NonNull;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
-import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
@@ -26,19 +26,20 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 public final class ModModelGenerator {
 	private final BlockModelGenerators generator;
 
-	public ModModelGenerator(BlockModelGenerators generator) {
+	public ModModelGenerator(final @NonNull BlockModelGenerators generator) {
 		this.generator = generator;
 	}
 
 	/**
-	 * Create blockstates for all directions and one orientation.
+	 * Create blockstates for all 6 directions and one orientation.
 	 *
 	 * @param map     to add the blockstates.
 	 * @param modelId block model *.json file name.
 	 */
 	public static void registerFlatNormal(
-		PropertyDispatch.C2<MultiVariant, Direction, BlockRegion> map,
-		BlockRegion orientation, Identifier modelId
+		PropertyDispatch.@NonNull C2<MultiVariant, Direction, BlockRegion> map,
+		final @NonNull BlockRegion orientation,
+		final @NonNull Identifier modelId
 	) {
 		map.select(Direction.DOWN, orientation,
 			BlockModelGenerators.plainVariant(modelId)
@@ -68,8 +69,9 @@ public final class ModModelGenerator {
 	 * @param modelId block model *.json file name.
 	 */
 	public static void registerFlatFlipped(
-		PropertyDispatch.C2<MultiVariant, Direction, BlockRegion> map,
-		BlockRegion orientation, Identifier modelId
+		PropertyDispatch.@NonNull C2<MultiVariant, Direction, BlockRegion> map,
+		final @NonNull BlockRegion orientation,
+		final @NonNull Identifier modelId
 	) {
 		map.select(Direction.DOWN, orientation,
 			BlockModelGenerators.plainVariant(modelId)
@@ -97,20 +99,26 @@ public final class ModModelGenerator {
 	/**
 	 * Create one model.
 	 */
-	public Identifier createFlatModel(
-		Block block, String template, String modelSuffix, String textureSuffix
+	public @NonNull Identifier createFlatModel(
+		final @NonNull Block block,
+		final @NonNull String template,
+		final @NonNull String modelSuffix,
+		final @NonNull String textureSuffix
 	) {
 		final ModelTemplate model = new ModelTemplate(Optional.of(Global.modId(template)),
 			Optional.empty(), TextureSlot.TEXTURE);
-		return generator.createSuffixedVariant(block, modelSuffix, model,
-			identifier -> new TextureMapping()
-				.put(TextureSlot.TEXTURE, ModelLocationUtils.getModelLocation(block, textureSuffix)));
+		final Material material = TextureMapping.getBlockTexture(block, textureSuffix);
+		return model.createWithSuffix(
+			block, modelSuffix,
+			new TextureMapping().put(TextureSlot.TEXTURE, material),
+			generator.modelOutput
+		);
 	}
 
 	/**
 	 * Create models and blockstates for 6 directions and 9 orientations.
 	 */
-	public PropertyDispatch<MultiVariant> createFlat9Direction(Block block) {
+	public @NonNull PropertyDispatch<MultiVariant> createFlat9Direction(final @NonNull Block block) {
 		// Models.
 		final Identifier center = createFlatModel(block,
 			TEMPLATE, "_center", "_center");
