@@ -2,7 +2,7 @@ package eu.pintergabor.arrowpointers.datagen;
 
 import eu.pintergabor.arrowpointers.Global;
 import eu.pintergabor.arrowpointers.main.ArrowRegistry;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
@@ -19,8 +19,8 @@ public final class ModModelProvider extends ModelProvider {
 	/**
 	 * Generate block models and block states.
 	 */
-	private static void generateBlockStateModel(@NotNull BlockModelGenerators blockModels) {
-		ModModelGenerator generator = new ModModelGenerator(blockModels);
+	private static void generateBlockStateModel(@NonNull BlockModelGenerators generators) {
+		ModModelGenerator generator = new ModModelGenerator(generators);
 		generator.registerFlat9Direction(ArrowRegistry.arrowMarkBlock.get());
 		generator.registerFlat9Direction(ArrowRegistry.glowArrowMarkBlock.get());
 	}
@@ -30,8 +30,8 @@ public final class ModModelProvider extends ModelProvider {
 	 */
 	@Override
 	protected void registerModels(
-		@NotNull BlockModelGenerators blockModels,
-		@NotNull ItemModelGenerators itemModels
+		@NonNull BlockModelGenerators blockModels,
+		@NonNull ItemModelGenerators itemModels
 	) {
 		// No items, because only vanilla items are used in this mod.
 		// Block models and block states.

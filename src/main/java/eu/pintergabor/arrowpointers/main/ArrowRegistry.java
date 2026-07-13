@@ -8,6 +8,7 @@ import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jspecify.annotations.NonNull;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -24,7 +25,9 @@ public final class ArrowRegistry {
 	public static DeferredBlock<Block> glowArrowMarkBlock;
 
 	private static boolean always(
-		BlockState state, BlockGetter blockView, BlockPos pos
+		final @NonNull BlockState state,
+		final @NonNull BlockGetter blockView,
+		final @NonNull BlockPos pos
 	) {
 		return true;
 	}
@@ -39,8 +42,7 @@ public final class ArrowRegistry {
 				.noCollision()
 				.noOcclusion()
 				.sound(SoundType.LADDER)
-				.lightLevel((state) -> arrowMarkBlockLumi)
-				.hasPostProcess(ArrowRegistry::always)
+				.lightLevel(_ -> arrowMarkBlockLumi)
 				.emissiveRendering(ArrowRegistry::always)
 				.pushReaction(PushReaction.DESTROY)
 		);
@@ -53,8 +55,7 @@ public final class ArrowRegistry {
 				.noCollision()
 				.noOcclusion()
 				.sound(SoundType.LADDER)
-				.lightLevel((state) -> glowArrowMarkBlockLumi)
-				.hasPostProcess(ArrowRegistry::always)
+				.lightLevel(_ -> glowArrowMarkBlockLumi)
 				.emissiveRendering(ArrowRegistry::always)
 				.pushReaction(PushReaction.DESTROY)
 		);

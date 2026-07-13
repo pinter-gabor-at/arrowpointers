@@ -4,7 +4,7 @@ import static eu.pintergabor.arrowpointers.util.BlockRegion.MIDDLECENTER;
 import static eu.pintergabor.arrowpointers.util.BlockRegion.getClickedRegion;
 
 import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -36,10 +36,11 @@ public final class ClickAction {
 	 * @param consume     the number of items needed (1 or 2).
 	 * @return the usual InteractionResult values.
 	 */
-	@NotNull
-	private static InteractionResult placeBlock(
-		@NotNull UseOnContext context, @NotNull Block block,
-		@NotNull BlockRegion orientation, int consume
+	private static @NonNull InteractionResult placeBlock(
+		final @NonNull UseOnContext context,
+		final @NonNull Block block,
+		final @NonNull BlockRegion orientation,
+		final int consume
 	) {
 		final Level level = context.getLevel();
 		final BlockPos pos = context.getClickedPos();
@@ -71,8 +72,9 @@ public final class ClickAction {
 	 * @param block   an {@link ArrowMarkBlock}.
 	 * @return the usual InteractionResult values.
 	 */
-	private static @NotNull InteractionResult placeBlock(
-		@NotNull UseOnContext context, @NotNull Block block
+	private static @NonNull InteractionResult placeBlock(
+		@NonNull UseOnContext context,
+		@NonNull Block block
 	) {
 		// Normally 1 item is needed, but if orientation is center, then 2.
 		final BlockRegion orientation = getClickedRegion(
@@ -97,7 +99,7 @@ public final class ClickAction {
 	 * @return true if the arrow mark block can be placed.
 	 */
 	@SuppressWarnings("RedundantIfStatement")
-	private static boolean canPlace(@NotNull UseOnContext context) {
+	private static boolean canPlace(final @NonNull UseOnContext context) {
 		final Level level = context.getLevel();
 		final BlockPos pos = context.getClickedPos();
 		final BlockState clickedBlockState = level.getBlockState(pos);
@@ -124,7 +126,10 @@ public final class ClickAction {
 	 * @param block   an {@link ArrowMarkBlock} corresponding to the item in hand.
 	 * @return the usual InteractionResult values.
 	 */
-	public static InteractionResult useOn(@NotNull UseOnContext context, @NotNull Block block) {
+	public static InteractionResult useOn(
+		final @NonNull UseOnContext context,
+		final @NonNull Block block
+	) {
 		final Level level = context.getLevel();
 		final BlockPos pos = context.getClickedPos();
 		final Direction clickedFace = context.getClickedFace();

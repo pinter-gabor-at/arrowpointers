@@ -4,7 +4,8 @@ import java.util.Set;
 
 import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
 import eu.pintergabor.arrowpointers.main.ArrowRegistry;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Unmodifiable;
+import org.jspecify.annotations.NonNull;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -25,8 +26,7 @@ public final class ModBlockLootTableGenerator extends BlockLootSubProvider {
 	 * NeoForge requires it.
 	 */
 	@Override
-	@NotNull
-	protected Iterable<Block> getKnownBlocks() {
+	protected @NonNull @Unmodifiable Iterable<Block> getKnownBlocks() {
 		return ArrowRegistry.BLOCKS.getEntries()
 			.stream()
 			.map(e -> (Block) e.get())

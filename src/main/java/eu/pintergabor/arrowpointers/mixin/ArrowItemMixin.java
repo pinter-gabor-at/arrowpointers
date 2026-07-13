@@ -2,7 +2,7 @@ package eu.pintergabor.arrowpointers.mixin;
 
 import eu.pintergabor.arrowpointers.main.ArrowRegistry;
 import eu.pintergabor.arrowpointers.util.ClickAction;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import org.spongepowered.asm.mixin.Mixin;
 
 import net.minecraft.world.InteractionResult;
@@ -22,8 +22,7 @@ public abstract class ArrowItemMixin extends Item {
 	 * Override the default method, which does nothing, with a custom action.
 	 */
 	@Override
-	@NotNull
-	public InteractionResult useOn(@NotNull UseOnContext context) {
+	public @NonNull InteractionResult useOn(final @NonNull UseOnContext context) {
 		return ClickAction.useOn(context, ArrowRegistry.arrowMarkBlock.get());
 	}
 }

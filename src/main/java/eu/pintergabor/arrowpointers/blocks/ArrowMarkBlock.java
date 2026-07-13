@@ -6,7 +6,7 @@ import static eu.pintergabor.arrowpointers.util.BlockRegion.MIDDLECENTER;
 import java.util.List;
 
 import eu.pintergabor.arrowpointers.util.BlockRegion;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -39,7 +39,7 @@ public final class ArrowMarkBlock extends Block {
 	public static final EnumProperty<BlockRegion> ORIENTATION =
 		EnumProperty.create("orientation", BlockRegion.class,
 			List.of(BlockRegion.VALUES));
-	// Shapes.
+	// Shapes. (Thin, flat 16x16 sheets.)
 	private static final VoxelShape DOWN_AABB = Block.box(
 		0D, 16D - thickness, 0D, 16D, 16D, 16D);
 	private static final VoxelShape UP_AABB = Block.box(
@@ -62,16 +62,16 @@ public final class ArrowMarkBlock extends Block {
 
 	@Override
 	protected void createBlockStateDefinition(
-		@NotNull StateDefinition.Builder<Block, BlockState> builder
+		final StateDefinition.@NonNull Builder<Block, BlockState> builder
 	) {
 		builder.add(FACING, ORIENTATION);
 		super.createBlockStateDefinition(builder);
 	}
 
 	@Override
-	@NotNull
-	protected List<ItemStack> getDrops(
-		@NotNull BlockState state, @NotNull LootParams.Builder builder
+	protected @NonNull List<ItemStack> getDrops(
+		final @NonNull BlockState state,
+		final LootParams.@NonNull Builder builder
 	) {
 		final List<ItemStack> dropStacks = super.getDrops(state, builder);
 		// If orientation is center, then drop 2 arrows.
@@ -83,10 +83,10 @@ public final class ArrowMarkBlock extends Block {
 
 	@Override
 	protected void spawnDestroyParticles(
-		@NotNull Level level,
-		@NotNull Player player,
-		@NotNull BlockPos pos,
-		@NotNull BlockState state
+		@NonNull Level level,
+		@NonNull Player player,
+		@NonNull BlockPos pos,
+		@NonNull BlockState state
 	) {
 		if (!level.isClientSide()) {
 			level.playSound(null, pos,
@@ -99,11 +99,11 @@ public final class ArrowMarkBlock extends Block {
 	 * Thin, flat outline shape.
 	 */
 	@Override
-	public @NotNull VoxelShape getShape(
-		@NotNull BlockState state,
-		@NotNull BlockGetter level,
-		@NotNull BlockPos pos,
-		@NotNull CollisionContext context
+	public @NonNull VoxelShape getShape(
+		final @NonNull BlockState state,
+		final @NonNull BlockGetter level,
+		final @NonNull BlockPos pos,
+		final @NonNull CollisionContext context
 	) {
 		return switch (state.getValue(FACING)) {
 			case UP -> UP_AABB;
@@ -119,11 +119,11 @@ public final class ArrowMarkBlock extends Block {
 	 * Unconditional pass-through.
 	 */
 	@Override
-	public @NotNull VoxelShape getCollisionShape(
-		@NotNull BlockState state,
-		@NotNull BlockGetter level,
-		@NotNull BlockPos pos,
-		@NotNull CollisionContext context
+	public @NonNull VoxelShape getCollisionShape(
+		final @NonNull BlockState state,
+		final @NonNull BlockGetter level,
+		final @NonNull BlockPos pos,
+		final @NonNull CollisionContext context
 	) {
 		return Shapes.empty();
 	}
@@ -133,7 +133,8 @@ public final class ArrowMarkBlock extends Block {
 	 */
 	@Override
 	public boolean canBeReplaced(
-		@NotNull BlockState state, @NotNull BlockPlaceContext context
+		final @NonNull BlockState state,
+		final @NonNull BlockPlaceContext context
 	) {
 		return true;
 	}
@@ -143,7 +144,9 @@ public final class ArrowMarkBlock extends Block {
 	 */
 	@Override
 	public boolean canSurvive(
-		@NotNull BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos
+		final @NonNull BlockState state,
+		final @NonNull LevelReader level,
+		final @NonNull BlockPos pos
 	) {
 		final Direction facing = state.getValue(FACING);
 		return Block.isFaceFull(level.getBlockState(pos.relative(facing.getOpposite()))
@@ -154,11 +157,15 @@ public final class ArrowMarkBlock extends Block {
 	 * Break, if neighboring full face block is broken.
 	 */
 	@Override
-	@NotNull
-	protected BlockState updateShape(
-		@NotNull BlockState state, @NotNull LevelReader level, @NotNull ScheduledTickAccess tickView,
-		@NotNull BlockPos pos, @NotNull Direction direction, @NotNull BlockPos neighborPos,
-		@NotNull BlockState neighborState, @NotNull RandomSource random
+	protected @NonNull BlockState updateShape(
+		final @NonNull BlockState state,
+		final @NonNull LevelReader level,
+		final @NonNull ScheduledTickAccess tickView,
+		final @NonNull BlockPos pos,
+		final @NonNull Direction direction,
+		final @NonNull BlockPos neighborPos,
+		final @NonNull BlockState neighborState,
+		final @NonNull RandomSource random
 	) {
 		final BlockPos supportPos = pos.relative(state.getValue(FACING).getOpposite());
 		final boolean support = neighborPos.equals(supportPos);
