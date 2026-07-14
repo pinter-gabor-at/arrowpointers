@@ -1,11 +1,12 @@
 package eu.pintergabor.arrowpointers.util;
 
 import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
-import org.jetbrains.annotations.NotNull;
 
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.phys.Vec3;
+
+import org.jspecify.annotations.NonNull;
 
 
 public enum BlockRegion implements StringRepresentable {
@@ -22,7 +23,7 @@ public enum BlockRegion implements StringRepresentable {
 	 */
 	private final String name;
 
-	BlockRegion(String name) {
+	BlockRegion(final @NonNull String name) {
 		this.name = name;
 	}
 
@@ -31,7 +32,7 @@ public enum BlockRegion implements StringRepresentable {
 	 *
 	 * @return Fractional part of v (always non-negative and less than 1)
 	 */
-	private static double frac(double v) {
+	private static double frac(final double v) {
 		return v - Math.floor(v);
 	}
 
@@ -42,7 +43,7 @@ public enum BlockRegion implements StringRepresentable {
 	 * @param ry [0, 1, 2] = [top, center, bottom]
 	 * @return region.
 	 */
-	private static BlockRegion blockreg(int rx, int ry) {
+	private static BlockRegion blockreg(final int rx, final int ry) {
 		return VALUES[3 * rx + ry];
 	}
 
@@ -53,7 +54,7 @@ public enum BlockRegion implements StringRepresentable {
 	 * @param ry [0 ... 1] = [top, center, bottom]
 	 * @return region.
 	 */
-	private static BlockRegion blockreg3(double rx, double ry) {
+	private static BlockRegion blockreg3(final double rx, final double ry) {
 		return blockreg(Math.min(2, (int) (3 * rx)), Math.min(2, (int) (3 * ry)));
 	}
 
@@ -67,7 +68,10 @@ public enum BlockRegion implements StringRepresentable {
 	 *
 	 * @return region.
 	 */
-	public static BlockRegion getClickedRegion(@NotNull Vec3 clickLocation, Direction face) {
+	public static BlockRegion getClickedRegion(
+		final @NonNull Vec3 clickLocation,
+		final @NonNull Direction face
+	) {
 		final double dx = frac(clickLocation.x);
 		final double dy = frac(clickLocation.y);
 		final double dz = frac(clickLocation.z);
@@ -82,8 +86,7 @@ public enum BlockRegion implements StringRepresentable {
 	}
 
 	@Override
-	@NotNull
-	public String getSerializedName() {
+	public @NonNull String getSerializedName() {
 		return name;
 	}
 }

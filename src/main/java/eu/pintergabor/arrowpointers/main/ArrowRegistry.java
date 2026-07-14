@@ -5,6 +5,7 @@ import static eu.pintergabor.arrowpointers.Global.glowArrowMarkBlockLumi;
 
 import eu.pintergabor.arrowpointers.Global;
 import eu.pintergabor.arrowpointers.blocks.ArrowMarkBlock;
+import org.jspecify.annotations.NonNull;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -23,7 +24,10 @@ public final class ArrowRegistry {
 	public static Block glowArrowMarkBlock;
 
 	private static boolean always(
-		BlockState state, BlockGetter blockView, BlockPos pos) {
+		final @NonNull BlockState state,
+		final @NonNull BlockGetter blockView,
+		final @NonNull BlockPos pos
+	) {
 		return true;
 	}
 
@@ -37,8 +41,7 @@ public final class ArrowRegistry {
 				.noCollision()
 				.noOcclusion()
 				.sound(SoundType.LADDER)
-				.lightLevel((state) -> arrowMarkBlockLumi)
-				.hasPostProcess(ArrowRegistry::always)
+				.lightLevel((_) -> arrowMarkBlockLumi)
 				.emissiveRendering(ArrowRegistry::always)
 				.pushReaction(PushReaction.DESTROY)
 		);
@@ -51,8 +54,7 @@ public final class ArrowRegistry {
 				.noCollision()
 				.noOcclusion()
 				.sound(SoundType.LADDER)
-				.lightLevel((state) -> glowArrowMarkBlockLumi)
-				.hasPostProcess(ArrowRegistry::always)
+				.lightLevel((_) -> glowArrowMarkBlockLumi)
 				.emissiveRendering(ArrowRegistry::always)
 				.pushReaction(PushReaction.DESTROY)
 		);
