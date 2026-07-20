@@ -3,7 +3,7 @@ package eu.pintergabor.arrowpointers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import net.minecraft.resources.Identifier;
 
@@ -38,7 +38,7 @@ public final class Global {
 	 */
 	@Contract("_ -> new")
 	@SuppressWarnings("unused")
-	public static @NotNull Identifier modId(String path) {
+	public static @NonNull Identifier modId(String path) {
 		return Identifier.fromNamespaceAndPath(MODID, path);
 	}
 }
