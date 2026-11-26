@@ -7,8 +7,8 @@ import eu.pintergabor.arrowpointers.main.ArrowRegistry;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NonNull;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -16,10 +16,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 
 
-public final class ModBlockLootTableGenerator extends BlockLootSubProvider {
+public class ModBlockLootTableGenerator extends BlockLootSubProvider {
 
-	public ModBlockLootTableGenerator(HolderLookup.Provider lookupProvider) {
-		super(Set.of(), FeatureFlags.DEFAULT_FLAGS, lookupProvider);
+	public ModBlockLootTableGenerator(final LootTableSubProvider.Context output) {
+		super(Set.of(), FeatureFlags.DEFAULT_FLAGS, output);
 	}
 
 	/**

@@ -32,7 +32,7 @@ public final class ArrowRegistry {
 				.sound(SoundType.LADDER)
 				.lightLevel(_ -> arrowMarkBlockLumi)
 				.emissiveRendering(_ -> true)
-				.pushReaction(PushReaction.DESTROY)
+				.pushReaction(PushReaction.POPPED)
 		);
 		glowArrowMarkBlock = BLOCKS.registerBlock(
 			"glow_arrow_mark",
@@ -45,7 +45,7 @@ public final class ArrowRegistry {
 				.sound(SoundType.LADDER)
 				.lightLevel(_ -> glowArrowMarkBlockLumi)
 				.emissiveRendering(_ -> true)
-				.pushReaction(PushReaction.DESTROY)
+				.pushReaction(PushReaction.POPPED)
 		);
 		BLOCKS.register(modEventBus);
 	}

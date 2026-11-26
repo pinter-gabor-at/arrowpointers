@@ -4,6 +4,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import org.jspecify.annotations.NonNull;
 
 
 /**
@@ -13,8 +14,12 @@ import net.neoforged.fml.common.Mod;
 public final class ModClient {
 
 	@SuppressWarnings("unused")
-	public ModClient(IEventBus modEventBus, ModContainer modContainer) {
+	public ModClient(
+		final @NonNull IEventBus modEventBus,
+		final @NonNull ModContainer modContainer
+	) {
 		// Data generator.
-		modEventBus.addListener(ModDataGenerator::init);
+		modEventBus.addListener(ModDataGenerator::listen0);
+		modEventBus.addListener(ModDataGenerator::listen1);
 	}
 }

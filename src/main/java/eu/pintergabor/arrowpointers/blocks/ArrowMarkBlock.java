@@ -13,7 +13,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -82,12 +81,12 @@ public final class ArrowMarkBlock extends Block {
 	}
 
 	@Override
-	protected void spawnDestroyParticles(
+	public void spawnDestroyParticles(
 		@NonNull Level level,
-		@NonNull Player player,
 		@NonNull BlockPos pos,
 		@NonNull BlockState state
 	) {
+		super.spawnDestroyParticles(level, pos, state);
 		if (!level.isClientSide()) {
 			level.playSound(null, pos,
 				SoundEvents.MOSS_CARPET_BREAK, SoundSource.BLOCKS,
